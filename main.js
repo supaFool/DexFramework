@@ -16,7 +16,7 @@ async function init() {
     document.getElementById("swap_button").disabled = false;
     //document.getElementById("login_button").innerText = "Logout";
     document.getElementById("login_button").hidden = true;
-  }else{
+  } else {
     logged_in = false;
     document.getElementById("login_button").innerText = "Sign in with Metamask";
   }
@@ -57,7 +57,8 @@ function selectToken(address) {
 function renderInterface() {
   if (currentTrade.from) {
     document.getElementById("from_token_img").src = currentTrade.from.logoURI;
-    document.getElementById("from_token_text").innerHTML = currentTrade.from.symbol;
+    document.getElementById("from_token_text").innerHTML =
+      currentTrade.from.symbol;
   }
   if (currentTrade.to) {
     document.getElementById("to_token_img").src = currentTrade.to.logoURI;
@@ -71,20 +72,20 @@ async function login() {
     if (!currentUser) {
       document.getElementById("login_button").innerText = "Authenticating...";
       currentUser = await Moralis.authenticate();
-    }else{
+    } else {
       logOut();
     }
     document.getElementById("swap_button").disabled = false;
-	document.getElementById("login_button").innerText = "Logout";
+    document.getElementById("login_button").innerText = "Logout";
     logged_in = true;
   } catch (error) {
     console.log(error);
   }
 }
 async function logOut() {
-   currentUser =  await Moralis.User.logOut();
-    document.getElementById("login_button").innerText = "Log In";
-    logged_in = false;
+  currentUser = await Moralis.User.logOut();
+  document.getElementById("login_button").innerText = "Log In";
+  logged_in = false;
 }
 
 function openModal(side) {
@@ -95,10 +96,19 @@ function closeModal() {
   document.getElementById("token_modal").style.display = "none";
 }
 
+async function searchForToken() { }
 async function getQuote() {
-  if (!currentTrade.from || !currentTrade.to || !document.getElementById("from_amount").value) return;
+  if (
+    !currentTrade.from ||
+    !currentTrade.to ||
+    !document.getElementById("from_amount").value
+  )
+    return;
 
-  let amount = Number(document.getElementById("from_amount").value * 10 ** currentTrade.from.decimals);
+  let amount = Number(
+    document.getElementById("from_amount").value *
+    10 ** currentTrade.from.decimals
+  );
 
   const quote = await Moralis.Plugins.oneInch.quote({
     chain: "bsc", // The blockchain you want to use (eth/bsc/polygon)
@@ -108,12 +118,16 @@ async function getQuote() {
   });
   console.log(quote);
   document.getElementById("gas_estimate").innerHTML = quote.estimatedGas;
-  document.getElementById("to_amount").value = quote.toTokenAmount / 10 ** quote.toToken.decimals;
+  document.getElementById("to_amount").value =
+    quote.toTokenAmount / 10 ** quote.toToken.decimals;
 }
 
 async function trySwap() {
   let address = Moralis.User.current().get("ethAddress");
-  let amount = Number(document.getElementById("from_amount").value * 10 ** currentTrade.from.decimals);
+  let amount = Number(
+    document.getElementById("from_amount").value *
+    10 ** currentTrade.from.decimals
+  );
   if (currentTrade.from.symbol !== "BNB") {
     const allowance = await Moralis.Plugins.oneInch.hasAllowance({
       chain: "bsc", // The blockchain you want to use (eth/bsc/polygon)

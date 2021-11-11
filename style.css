@@ -1,42 +1,42 @@
-#window{
-    margin-top: 50px;
-    background-color: #000;
-    color: #1B4965;
-    padding: 15px;
-    border-radius: 20px;
-    box-shadow: 0 0 5px black;
+#window {
+  margin-top: 50px;
+  background-color: #000;
+  color: #1b4965;
+  padding: 15px;
+  border-radius: 20px;
+  box-shadow: 0 0 5px black;
 }
 .swapbox_select {
-    width: 50%;
-    float: left;
+  width: 50%;
+  float: left;
 }
-.swapbox{
-    overflow: auto;
-    margin: 20px 0;
-    padding: 20px;
-    background-color: #62B6CB;
-    border-radius: 20px;
-    border: 1px solid #565656;
+.swapbox {
+  overflow: auto;
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #62b6cb;
+  border-radius: 20px;
+  border: 1px solid #565656;
 }
-.token_select{
-    padding:5px 0;
+.token_select {
+  padding: 5px 0;
 }
-.token_select:hover{
-    background-color: #5FA8D3;
-    cursor: pointer;
-    
+.token_select:hover {
+  background-color: #5fa8d3;
+  cursor: pointer;
 }
-.token_list_img, .token_image{
-    width: 40px;
+.token_list_img,
+.token_image {
+  width: 40px;
 }
-.modal-body{
-    height: 600px;
-    overflow: scroll;
+.modal-body {
+  height: 600px;
+  overflow: scroll;
 }
-.token_row{
-    padding: 5px 10px;
+.token_row {
+  padding: 5px 10px;
 }
-.token_row:hover{
-    background-color: #BEE9E8;
-    cursor: pointer;
+.token_row:hover {
+  background-color: #bee9e8;
+  cursor: pointer;
 }

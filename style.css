@@ -1,7 +1,7 @@
 #window {
   margin-top: 50px;
   background-color: #000;
-  color: #d64910;
+  color: #e08104;
   padding: 15px;
   border-radius: 20px;
   box-shadow: 0 0 5px black;
@@ -39,4 +39,7 @@
 .token_row:hover {
   background-color: #bee9e8;
   cursor: pointer;
+}
+.from_token_select {
+  color: #42e004;
 }

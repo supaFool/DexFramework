@@ -6,6 +6,10 @@
   border-radius: 20px;
   box-shadow: 0 0 5px black;
 }
+
+#h4{
+  color: #3dca11;
+}
 .swapbox_select {
   width: 50%;
   float: left;
@@ -39,4 +43,16 @@
 .token_row:hover {
   background-color: #bee9e8;
   cursor: pointer;
+}
+
+.center {
+  margin: auto;
+  width:75%;
+  border: 3px solid green;
+  padding: 10px;
+}
+.searchbar {
+  margin: auto;
+  width:100%;
+  padding: 10px;
 }

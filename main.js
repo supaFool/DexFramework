@@ -45,11 +45,14 @@ async function listAvailableTokens() {
   }
 }
 
-function selectToken(address) {
+async function selectToken(address) {
   closeModal();
   console.log(tokens);
   currentTrade[currentSelectSide] = tokens[address];
-  console.log(currentTrade);
+  const options = { chain: "bsc", addresses: "0xae3fe7bb963e9a3274061818ea54466e123b1772" };
+const tokenMetadata = await Moralis.Web3API.token.getTokenMetadata(options);
+  document.getElementById("testing").innerText = JSON.stringify(tokenMetadata);
+  console.log(tokenMetadata + "This is current trade");
   renderInterface();
   getQuote();
 }
@@ -120,6 +123,9 @@ async function getQuote() {
   document.getElementById("gas_estimate").innerHTML = quote.estimatedGas;
   document.getElementById("to_amount").value =
     quote.toTokenAmount / 10 ** quote.toToken.decimals;
+}
+
+async function fillData(address){
 }
 
 async function trySwap() {

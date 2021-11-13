@@ -99,7 +99,10 @@ function closeModal() {
   document.getElementById("token_modal").style.display = "none";
 }
 
-async function searchForToken() { }
+function searchForToken() {
+  var bar = document.getElementById("tokenSearch");
+    document.getElementById("testing").innerText = bar.value;
+ }
 async function getQuote() {
   if (
     !currentTrade.from ||
@@ -123,9 +126,6 @@ async function getQuote() {
   document.getElementById("gas_estimate").innerHTML = quote.estimatedGas;
   document.getElementById("to_amount").value =
     quote.toTokenAmount / 10 ** quote.toToken.decimals;
-}
-
-async function fillData(address){
 }
 
 async function trySwap() {
@@ -182,3 +182,4 @@ document.getElementById("to_token_select").onclick = () => {
 document.getElementById("login_button").onclick = login;
 document.getElementById("from_amount").oninput = getQuote;
 document.getElementById("swap_button").onclick = trySwap;
+document.getElementById("search_button").onclick = searchForToken;

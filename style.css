@@ -50,8 +50,16 @@
   color: #42e004;
 }
 .container {
-  padding-top: 80px;
+  padding-top: 35px;
 }
+.slip {
+  color:rgba(252, 89, 14, 0.7);
+  position: relative;
+  left: 280px;
+}
+
+
+/*Custom Scroll Bar/////////////////////////
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
@@ -74,3 +82,4 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+/*Custom Scroll Bar/////////////////////////

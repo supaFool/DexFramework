@@ -57,8 +57,9 @@
   padding-top: 35px;
 }
 .slip {
-  color:rgba(252, 89, 14, 0.7);
+  color:#e08104;
   text-align: right;
+  font-weight: bold;
 }
 
 

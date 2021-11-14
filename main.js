@@ -103,6 +103,11 @@ function searchForToken() {
   var bar = document.getElementById("tokenSearch");
     document.getElementById("testing").innerText = bar.value;
  }
+function setSlippage() {
+  var slipinput = document.getElementById("slippage");
+    document.getElementById("slippage").innerText = slipinput.value;
+    console.log(slipinput.value);
+ }
 async function getQuote() {
   if (
     !currentTrade.from ||
@@ -165,7 +170,7 @@ function doSwap(userAddress, amount) {
     toTokenAddress: currentTrade.to.address, // The token you want to receive
     amount: amount,
     fromAddress: userAddress, // Your wallet address
-    slippage: 20,
+    slippage: slipinput.value,
   });
 }
 
@@ -183,3 +188,4 @@ document.getElementById("login_button").onclick = login;
 document.getElementById("from_amount").oninput = getQuote;
 document.getElementById("swap_button").onclick = trySwap;
 document.getElementById("search_button").onclick = searchForToken;
+document.getElementById("slippage").oninput = setSlippage;

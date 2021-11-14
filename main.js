@@ -54,7 +54,7 @@ let tokenMetadata = await token_obj.getTokenMetadata(options);
 
 //Adds Searched Token info to vars, and prints to console.
 // Will be framework for adding coin to 'modal'
-async function listSearchedTokens(found_token){
+function listSearchedTokens(found_token){
   const fname = found_token.name;
   const fsymbol = found_token.symbol;
   const flogo = found_token.logo;

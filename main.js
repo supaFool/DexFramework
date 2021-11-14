@@ -4,21 +4,59 @@ const appId = "SJlvpL4zKheiaYlFnUpSL5ozOZsq7D7Q45nbwckX"; // Application id from
 let currentTrade = {};
 let currentSelectSide;
 let tokens;
+let token_obj;
 let logged_in;
 
+
+//Called when site is loading.
 async function init() {
   await Moralis.start({ serverUrl, appId });
   await Moralis.enableWeb3();
   await listAvailableTokens();
+
+  token_obj = await Moralis.Web3API.token;
   currentUser = Moralis.User.current();
   if (currentUser) {
     logged_in = true;
     document.getElementById("swap_button").disabled = false;
     //document.getElementById("login_button").innerText = "Logout";
     document.getElementById("login_button").hidden = true;
-  } else {
+    const options = { chain: "bsc", addresses: "0x7301D90C8B778e37124C9AE0cf1Cd1E6f7B58a06" };
+let tokenMetadata = await token_obj.getTokenMetadata(options);
+  document.getElementById("testing").innerText = tokenMetadata[0].name;
+  console.log(JSON.stringify(tokenMetadata) + "This is current trade");
+  listSearchedTokens(tokenMetadata[0]);
+  } 
+  else 
+  {
     logged_in = false;
     document.getElementById("login_button").innerText = "Sign in with Metamask";
+  }
+
+}
+
+async function listSearchedTokens(found_token){
+  const fname = found_token.name;
+  const fsymbol = found_token.symbol;
+  const flogo = found_token.logo;
+  const faddress = found_token.address;
+  const fdecimals = found_token.decimals;
+
+  
+  if (fname) {
+    console.log("Token Name: " + fname);
+  }
+  if (fsymbol) {
+    console.log("Token Symbol: " + fsymbol);
+  }
+  if (flogo) {
+    console.log("Token Logo: " + flogo);
+  }
+  if (faddress) {
+    console.log("Token Address: " + faddress);
+  }
+  if (fdecimals) {
+    console.log("Token Decimals: " + fdecimals);
   }
 }
 
@@ -49,10 +87,7 @@ async function selectToken(address) {
   closeModal();
   console.log(tokens);
   currentTrade[currentSelectSide] = tokens[address];
-  const options = { chain: "bsc", addresses: "0x7301D90C8B778e37124C9AE0cf1Cd1E6f7B58a06" };
-const tokenMetadata = await Moralis.Web3API.token.getTokenMetadata(options);
-  document.getElementById("testing").innerText = JSON.stringify(tokenMetadata);
-  console.log(JSON.stringify(tokenMetadata) + "This is current trade");
+  
   renderInterface();
   getQuote();
 }

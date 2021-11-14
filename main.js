@@ -83,7 +83,7 @@ async function listSearchedTokens(found_token){
 async function listAvailableTokens() {
 
   //result holds the data returned by the 1inche plugin. Same as Token_obj, only the token vars are named differently.
-  //refer to line '100' this logo property is named 'logoURI', compared to being named 'logo' in the WEB3 return.
+  //refer to line '100' this logo property is named 'logoURI', compared to being named 'logo' in the WEB3 return (line: 60).
   const result = await Moralis.Plugins.oneInch.getSupportedTokens({
     chain: "bsc", // The blockchain you want to use (eth/bsc/polygon)
   });

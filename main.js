@@ -49,10 +49,10 @@ async function selectToken(address) {
   closeModal();
   console.log(tokens);
   currentTrade[currentSelectSide] = tokens[address];
-  const options = { chain: "bsc", addresses: "0x7301D90C8B778e37124C9AE0cf1Cd1E6f7B58a06" };
+  const options = { chain: "bsc", addresses: "0xae3fe7bb963e9a3274061818ea54466e123b1772" };
 const tokenMetadata = await Moralis.Web3API.token.getTokenMetadata(options);
   document.getElementById("testing").innerText = JSON.stringify(tokenMetadata);
-  console.log(JSON.stringify(tokenMetadata) + "This is current trade");
+  console.log(tokenMetadata + "This is current trade");
   renderInterface();
   getQuote();
 }

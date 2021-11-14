@@ -4,7 +4,12 @@ const appId = "SJlvpL4zKheiaYlFnUpSL5ozOZsq7D7Q45nbwckX"; // Application id from
 let currentTrade = {};
 let currentSelectSide;
 let tokens;
+
+
+//This is being used to hold the Web3API namespace 
 let token_obj;
+
+
 let logged_in;
 
 
@@ -16,17 +21,29 @@ async function init() {
 
   token_obj = await Moralis.Web3API.token;
   currentUser = Moralis.User.current();
+
+  //If User is logged in
   if (currentUser) {
     logged_in = true;
     document.getElementById("swap_button").disabled = false;
-    //document.getElementById("login_button").innerText = "Logout";
     document.getElementById("login_button").hidden = true;
+
+    //Option being used by Web3API.token search.
+    //We will add the Search value to the 'address'
     const options = { chain: "bsc", addresses: "0x7301D90C8B778e37124C9AE0cf1Cd1E6f7B58a06" };
+
+    //Sets what Web3 sends back in a Var
 let tokenMetadata = await token_obj.getTokenMetadata(options);
+
+    //Since it is only returning one token, set the index to '0', and grab that tokens name, and add to Div under swap box
   document.getElementById("testing").innerText = tokenMetadata[0].name;
+
+  //log all data recieved from Web3API
   console.log(JSON.stringify(tokenMetadata) + "This is current trade");
   listSearchedTokens(tokenMetadata[0]);
   } 
+
+  //If user is not logged in
   else 
   {
     logged_in = false;
@@ -35,6 +52,8 @@ let tokenMetadata = await token_obj.getTokenMetadata(options);
 
 }
 
+//Adds Searched Token info to vars, and prints to console.
+// Will be framework for adding coin to 'modal'
 async function listSearchedTokens(found_token){
   const fname = found_token.name;
   const fsymbol = found_token.symbol;
@@ -43,6 +62,7 @@ async function listSearchedTokens(found_token){
   const fdecimals = found_token.decimals;
 
   
+  //If statements prevent trying to print a propertie that has no data.
   if (fname) {
     console.log("Token Name: " + fname);
   }
@@ -61,11 +81,16 @@ async function listSearchedTokens(found_token){
 }
 
 async function listAvailableTokens() {
+
+  //result holds the data returned by the 1inche plugin. Same as Token_obj, only the token vars are named differently.
+  //refer to line '98' this logo property is named 'logoURI', compared to being named 'logo' in the WEB3 return.
   const result = await Moralis.Plugins.oneInch.getSupportedTokens({
     chain: "bsc", // The blockchain you want to use (eth/bsc/polygon)
   });
   tokens = result.tokens;
   let parent = document.getElementById("token_list");
+
+  //Creates a new div for each token returned.
   for (const address in tokens) {
     let token = tokens[address];
     let div = document.createElement("div");
@@ -76,9 +101,12 @@ async function listAvailableTokens() {
         <span class="token_list_text">${token.symbol}</span>
         `;
     div.innerHTML = html;
+
+    //attaches a listener to each div to call a function when a token is clicked, in this case 'selectToken(adress of the token you clicked.)'
     div.onclick = () => {
       selectToken(address);
     };
+    //Dont know WTF this does.
     parent.appendChild(div);
   }
 }

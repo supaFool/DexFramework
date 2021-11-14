@@ -62,7 +62,7 @@ function listSearchedTokens(found_token){
   const fdecimals = found_token.decimals;
 
   
-  //If statements prevent trying to print a propertie that has no data.
+  //If statements prevent trying to print a property that has no data.
   if (fname) {
     console.log("Token Name: " + fname);
   }
@@ -111,11 +111,11 @@ async function listAvailableTokens() {
   }
 }
 
+//Gets called when the token is clicked from the modal
 async function selectToken(address) {
   closeModal();
   console.log(tokens);
   currentTrade[currentSelectSide] = tokens[address];
-  
   renderInterface();
   getQuote();
 }
@@ -172,7 +172,12 @@ function setSlippage() {
     document.getElementById("slippage").innerText = slipinput.value;
     console.log(slipinput.value);
  }
+
+ //Gets the Quote of Gas, and swap exchange rate. This is what is called when 
+ //typing the in 'Amount' input field
 async function getQuote() {
+
+  //If any of the input fields are empty, then dont do anything
   if (
     !currentTrade.from ||
     !currentTrade.to ||
@@ -180,15 +185,19 @@ async function getQuote() {
   )
     return;
 
+
+  // Convert the input text to the tenth power
   let amount = Number(
     document.getElementById("from_amount").value *
     10 ** currentTrade.from.decimals
   );
-
+  
+  //set the quote const to whatever oneInch returns when it asks for the quote.
   const quote = await Moralis.Plugins.oneInch.quote({
     chain: "bsc", // The blockchain you want to use (eth/bsc/polygon)
     fromTokenAddress: currentTrade.from.address, // The token you want to swap
     toTokenAddress: currentTrade.to.address, // The token you want to receive
+    //Amount of tokens you want to swap from
     amount: amount,
   });
   console.log(quote);

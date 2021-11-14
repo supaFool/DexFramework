@@ -54,7 +54,7 @@
 }
 .slip {
   color:rgba(252, 89, 14, 0.7);
-  position: relative;
+  margin: auto;
   left: 280px;
 }
 

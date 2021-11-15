@@ -1,9 +1,11 @@
 const serverUrl = "https://klpxwezyuiua.usemoralis.com:2053/server"; //Server url from moralis.io
 const appId = "SJlvpL4zKheiaYlFnUpSL5ozOZsq7D7Q45nbwckX"; // Application id from moralis.io
 
+
 let currentTrade = {};
 let currentSelectSide;
 let tokens;
+
 
 
 //This is being used to hold the Web3API namespace 
@@ -30,18 +32,18 @@ async function init() {
 
     //Option being used by Web3API.token search.
     //We will add the Search value to the 'address'
-    const options = { chain: "bsc", addresses: "0x7301D90C8B778e37124C9AE0cf1Cd1E6f7B58a06" };
+    //const options = { chain: "bsc", addresses: searchedTokenAddress };
 
     //Sets what Web3 sends back in a Var
-let tokenMetadata = await token_obj.getTokenMetadata(options);
+//let tokenMetadata = await token_obj.getTokenMetadata(options);
 
     //Since it is only returning one token, set the index to '0', and grab that tokens name, and add to Div under swap box
-  document.getElementById("testing").innerText = tokenMetadata[0].name;
+  //document.getElementById("testing").innerText = tokenMetadata[0].name;
 
   //log all data recieved from Web3API
-  console.log(JSON.stringify(tokenMetadata) + "This is current trade");
-  listSearchedTokens(tokenMetadata[0]);
-  } 
+  //console.log(JSON.stringify(tokenMetadata) + "This is current trade");
+  //listSearchedTokens(tokenMetadata[0]);
+  }
 
   //If user is not logged in
   else 
@@ -55,17 +57,18 @@ let tokenMetadata = await token_obj.getTokenMetadata(options);
 //Adds Searched Token info to vars, and prints to console.
 // Will be framework for adding coin to 'modal'
 function listSearchedTokens(found_token){
-  const fname = found_token.name;
-  const fsymbol = found_token.symbol;
-  const flogo = found_token.logo;
-  const faddress = found_token.address;
-  const fdecimals = found_token.decimals;
+  console.log(found_token.name);
+  const fname = JSON.stringify(found_token.name)
+  let fsymbol = found_token.symbol;
+  let flogo = found_token.logo;
+  let faddress = found_token.address;
+  let fdecimals = found_token.decimals;
 
   
   //If statements prevent trying to print a property that has no data.
-  if (fname) {
+  
     console.log("Token Name: " + fname);
-  }
+    
   if (fsymbol) {
     console.log("Token Symbol: " + fsymbol);
   }
@@ -163,9 +166,14 @@ function closeModal() {
   document.getElementById("token_modal").style.display = "none";
 }
 
-function searchForToken() {
+async function searchForToken() {
   var bar = document.getElementById("tokenSearch");
-    document.getElementById("testing").innerText = bar.value;
+  const searchedTokenAddress = bar.value;
+  document.getElementById("testing").innerText = searchedTokenAddress;
+    const options = { chain: "bsc", addresses: searchedTokenAddress };
+    closeModal();
+    let searchedTokenMetaData = await token_obj.getTokenMetadata(options)
+    listSearchedTokens(searchedTokenMetaData[0]);
  }
 function setSlippage() {
   var slipinput = document.getElementById("slippage");

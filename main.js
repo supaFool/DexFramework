@@ -1,6 +1,8 @@
 const serverUrl = "https://klpxwezyuiua.usemoralis.com:2053/server"; //Server url from moralis.io
 const appId = "SJlvpL4zKheiaYlFnUpSL5ozOZsq7D7Q45nbwckX"; // Application id from moralis.io
 
+//If searching for a cutom coin = true
+let custom_coin = false;
 
 let currentTrade = {};
 let currentSelectSide;
@@ -118,10 +120,21 @@ async function listAvailableTokens() {
 }
 
 //Gets called when the token is clicked from the modal
-async function selectToken(address) {
+async function selectToken(address) 
+{
   closeModal();
   console.log(address.name);
-  currentTrade[currentSelectSide] = address;
+
+  if (custom_coin) 
+  {
+    currentTrade[currentSelectSide] = address;
+  }
+  else
+  {
+    currentTrade[currentSelectSide] = tokens[address];
+  }
+  custom_coin = false;
+
   renderInterface();
   getQuote();
 }
@@ -170,17 +183,20 @@ function closeModal() {
 }
 
 async function searchForToken() {
+  custom_coin = true;
   var bar = document.getElementById("tokenSearch");
   let searchedTokenAddress = bar.value;
   document.getElementById("testing").innerText = searchedTokenAddress;
     const options = { chain: "bsc", addresses: searchedTokenAddress };
     //closeModal();
-    let searchedTokenMetaData = await token_obj.getTokenMetadata(options)
-    listSearchedTokens(searchedTokenMetaData[0]);
+    let searchedTokenMetaData = await token_obj.getTokenMetadata(options);
+    if (searchedTokenMetaData) {
+      listSearchedTokens(searchedTokenMetaData[0]);
+    }
  }
 function setSlippage() {
   var slipinput = document.getElementById("slippage");
-    document.getElementById("slippage").innerText = slipinput.value;
+    //document.getElementById("slippage").innerText = slipinput.value;
     console.log(slipinput.value);
  }
 
@@ -254,7 +270,7 @@ function doSwap(userAddress, amount) {
     toTokenAddress: currentTrade.to.address, // The token you want to receive
     amount: amount,
     fromAddress: userAddress, // Your wallet address
-    slippage: slipinput.value,
+    slippage: 15,
   });
 }
 

@@ -29,7 +29,7 @@ async function init() {
     if (currentUser) {
         logged_in = true;
         document.getElementById("swap_button").disabled = false;
-        document.getElementById("login_button").hidden = true;
+        document.getElementById("login_button").innerText = "Logout";
 
         //Option being used by Web3API.token search.
         //We will add the Search value to the 'address'
@@ -62,6 +62,7 @@ function listSearchedTokens(found_token) {
     let flogo = found_token.logo;
     let faddress = found_token.address;
     let fdecimals = found_token.decimals;
+    console.log(fdecimals);
 
     //If statements prevent trying to print a property that has no data.
 
@@ -238,7 +239,7 @@ async function getQuote() {
         //Amount of tokens you want to swap from
         amount: amount,
     });
-    console.log(JSON.stringify(quote.toToken.decimals) + "This is the qoute");
+    // console.log(JSON.stringify(quote.toToken.decimals) + "This is the qoute");
     document.getElementById("gas_estimate").innerHTML = quote.estimatedGas;
     document.getElementById("to_amount").value =
         quote.toTokenAmount / 10 ** toToken.decimals;
@@ -293,7 +294,7 @@ function doSwap(userAddress, amount) {
         toTokenAddress: toToken.address, // The token you want to receive
         amount: amount,
         fromAddress: userAddress, // Your wallet address
-        slippage: 15,
+        slippage: 25,
     });
 }
 

@@ -10,6 +10,7 @@ let currentSelectSide;
 let tokens;
 let fromToken;
 let toToken;
+let slippage;
 
 //This is being used to hold the Web3API namespace
 let token_obj;
@@ -211,8 +212,9 @@ async function searchForToken() {
 
 function setSlippage() {
     var slipinput = document.getElementById("slippage");
+    slippage = slipinput.value;
     //document.getElementById("slippage").innerText = slipinput.value;
-    console.log(slipinput.value);
+    console.log(slippage);
 }
 
 //Gets the Quote of Gas, and swap exchange rate. This is what is called when
@@ -294,7 +296,7 @@ function doSwap(userAddress, amount) {
         toTokenAddress: toToken.address, // The token you want to receive
         amount: amount,
         fromAddress: userAddress, // Your wallet address
-        slippage: 25,
+        slippage: slippage,
     });
 }
 

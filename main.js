@@ -4,7 +4,7 @@ const appId = "SJlvpL4zKheiaYlFnUpSL5ozOZsq7D7Q45nbwckX"; // Application id from
 //If searching for a cutom coin = true
 var custom_coin = false;
 var from;
-test
+
 //let currentTrade = {};
 let currentSelectSide;
 let tokens;

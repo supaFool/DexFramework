@@ -1,112 +1,151 @@
 #window {
-  margin-top: 50px;
-  background-color: rgba(0, 0, 0, 0.7);
-  color: #e08104;
-  padding: 15px;
-  border-radius: 20px;
-  box-shadow: 0 0 5px black;
+    margin-top: 50px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #e08104;
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: 0 0 5px black;
 }
 
-#h4{
-  color: #3dca11;
+#h4 {
+    color: #3dca11;
 }
+
 .swapbox_select {
-  width: 50%;
-  float: left;
- }
+    width: 50%;
+    float: left;
+}
+
 .swapbox {
-  overflow: auto;
-  margin: 20px 0;
-  padding: 20px;
-  background-color: #0cb2db;
-  border-radius: 20px;
-  border: 1px solid #565656;
+    overflow: auto;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #0cb2db;
+    border-radius: 20px;
+    border: 1px solid #565656;
 }
+
 .token_select {
-  padding: 5px 0;
-  color: #000000;
-  font-weight: bold;
+    padding: 5px 0;
+    color: #000000;
+    font-weight: bold;
 }
+
 .token_select:hover {
-  background-color: #5fa8d3;
-  cursor: pointer;
+    background-color: #5fa8d3;
+    cursor: pointer;
 }
+
 .token_list_img,
 .token_image {
-  width: 40px;
-  padding-right: 10px;
+    width: 40px;
+    padding-right: 10px;
 }
+
 .modal-content {
-  background-color: #5fa8d3;
-  height: 600px;
-  overflow: auto;
-  border-radius: 20px;
+    background-color: #5fa8d3;
+    height: 600px;
+    overflow: auto;
+    border-radius: 20px;
 }
+
 .token_row {
-  padding: 5px 10px;
+    padding: 5px 10px;
 }
+
 .token_row:hover {
-  background-color: #bee9e8;
-  cursor: pointer;
-  border-radius: 20px;
+    background-color: #bee9e8;
+    cursor: pointer;
+    border-radius: 20px;
 }
+
 .from_token_select {
-  color: #42e004;
+    color: #42e004;
 }
+
 .container {
-  padding-top: 35px;
+    padding-top: 35px;
 }
+
 .slip {
-  color:#e08104;
-  text-align: right;
-  font-weight: bold;
+    color: #e08104;
+    text-align: right;
+    font-weight: bold;
 }
 
 
 /*Custom Scroll Bar/////////////////////////
 /* width */
+
 ::-webkit-scrollbar {
-  width: 10px;
+    width: 10px;
 }
+
 
 /* Track */
+
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 20px;
+    background: #f1f1f1;
+    border-radius: 20px;
 }
+
 
 /* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 20px;
 
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 20px;
 }
+
 
 /* Handle on hover */
+
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+    background: #555;
 }
 
 .center {
-  margin: auto;
-  width:75%;
-  border: 3px solid green;
-  padding: 10px;
+    margin: auto;
+    width: 75%;
+    border: 3px solid green;
+    padding: 10px;
 }
+
 .searchbar {
-  margin: auto;
-  width:100%;
-  padding: 10px;
+    margin: auto;
+    width: 100%;
+    padding: 10px;
 }
 
 .center {
-  margin: auto;
-  width:75%;
-  border: 3px solid green;
-  padding: 10px;
+    margin: auto;
+    width: 75%;
+    border: 3px solid green;
+    padding: 10px;
 }
+
 .searchbar {
-  margin: auto;
-  width:100%;
-  padding: 10px;
+    margin: auto;
+    width: 100%;
+    padding: 10px;
+}
+
+.center {
+    margin: auto;
+    width: 75%;
+    border: 3px solid green;
+    padding: 10px;
+}
+
+.center {
+    margin: auto;
+    width: 75%;
+    border: 3px solid green;
+    padding: 10px;
+}
+
+.searchbar {
+    margin: auto;
+    width: 100%;
+    padding: 10px;
 }

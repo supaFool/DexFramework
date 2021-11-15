@@ -81,6 +81,9 @@ function listSearchedTokens(found_token){
   if (fdecimals) {
     console.log("Token Decimals: " + fdecimals);
   }
+
+  selectToken(found_token)
+
 }
 
 async function listAvailableTokens() {
@@ -117,15 +120,15 @@ async function listAvailableTokens() {
 //Gets called when the token is clicked from the modal
 async function selectToken(address) {
   closeModal();
-  console.log(tokens);
-  currentTrade[currentSelectSide] = tokens[address];
+  console.log(address.name);
+  currentTrade[currentSelectSide] = address;
   renderInterface();
   getQuote();
 }
 
 function renderInterface() {
   if (currentTrade.from) {
-    document.getElementById("from_token_img").src = currentTrade.from.logoURI;
+    //document.getElementById("from_token_img").src = currentTrade.from.logo;
     document.getElementById("from_token_text").innerHTML =
       currentTrade.from.symbol;
   }
@@ -168,10 +171,10 @@ function closeModal() {
 
 async function searchForToken() {
   var bar = document.getElementById("tokenSearch");
-  const searchedTokenAddress = bar.value;
+  let searchedTokenAddress = bar.value;
   document.getElementById("testing").innerText = searchedTokenAddress;
     const options = { chain: "bsc", addresses: searchedTokenAddress };
-    closeModal();
+    //closeModal();
     let searchedTokenMetaData = await token_obj.getTokenMetadata(options)
     listSearchedTokens(searchedTokenMetaData[0]);
  }
@@ -185,7 +188,7 @@ function setSlippage() {
  //typing the in 'Amount' input field
 async function getQuote() {
 
-  //If any of the input fields are empty, then dont do anything
+  //If any of the input fields are empty, the0xae3fE7bB963e9A3274061818EA54466E123B1772n dont do anything
   if (
     !currentTrade.from ||
     !currentTrade.to ||

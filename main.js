@@ -227,7 +227,7 @@ async function getQuote() {
     //Amount of tokens you want to swap from
     amount: amount,
   });
-  console.log(quote);
+  console.log(JSON.stringify(quote.toToken.decimals) + "This is the qoute");
   document.getElementById("gas_estimate").innerHTML = quote.estimatedGas;
   document.getElementById("to_amount").value =
     quote.toTokenAmount / 10 ** quote.toToken.decimals;
@@ -246,7 +246,7 @@ async function trySwap() {
       fromAddress: address, // Your wallet address
       amount: amount,
     });
-    console.log(allowance);
+    console.log(allowance + "This is allowance");
     if (!allowance) {
       await Moralis.Plugins.oneInch.approve({
         chain: "bsc", // The blockchain you want to use (eth/bsc/polygon)

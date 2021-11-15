@@ -3,18 +3,23 @@ const appId = "SJlvpL4zKheiaYlFnUpSL5ozOZsq7D7Q45nbwckX"; // Application id from
 
 //If searching for a cutom coin = true
 var custom_coin = false;
+
+//Temp var, will probably delete
 var from;
 
-//let currentTrade = {};
+//'from' or 'to'
 let currentSelectSide;
+
+
 let tokens;
 let fromToken;
 let toToken;
-let slippage;
+let slippage = 15;
 
 //This is being used to hold the Web3API namespace
 let token_obj;
 
+//keeps track of if a user is logged in.
 let logged_in;
 
 //Called when site is loading.
@@ -26,25 +31,12 @@ async function init() {
     token_obj = await Moralis.Web3API.token;
     currentUser = Moralis.User.current();
 
+    document.getElementById("slippage").value = slippage;
     //If User is logged in
     if (currentUser) {
         logged_in = true;
         document.getElementById("swap_button").disabled = false;
         document.getElementById("login_button").innerText = "Logout";
-
-        //Option being used by Web3API.token search.
-        //We will add the Search value to the 'address'
-        //const options = { chain: "bsc", addresses: searchedTokenAddress };
-
-        //Sets what Web3 sends back in a Var
-        //let tokenMetadata = await token_obj.getTokenMetadata(options);
-
-        //Since it is only returning one token, set the index to '0', and grab that tokens name, and add to Div under swap box
-        //document.getElementById("testing").innerText = tokenMetadata[0].name;
-
-        //log all data recieved from Web3API
-        //console.log(JSON.stringify(tokenMetadata) + "This is current trade");
-        //listSearchedTokens(tokenMetadata[0]);
     }
 
     //If user is not logged in
@@ -57,6 +49,7 @@ async function init() {
 //Adds Searched Token info to vars, and prints to console.
 // Will be framework for adding coin to 'modal'
 function listSearchedTokens(found_token) {
+    closeModal();
     console.log(found_token.name);
     const fname = JSON.stringify(found_token.name);
     let fsymbol = found_token.symbol;
@@ -67,6 +60,8 @@ function listSearchedTokens(found_token) {
 
     //If statements prevent trying to print a property that has no data.
 
+    console.log("Token Name: " + fname);
+    console.log("Token Name: " + fname);
     console.log("Token Name: " + fname);
 
     if (fsymbol) {
@@ -128,12 +123,9 @@ async function selectToken(address) {
         if (currentSelectSide == 'to') {
             toToken = address;
         }
-        console.log(fromToken + "This is the log I added");
-        //currentTrade[currentSelectSide] = address;
         renderInterface();
         getQuote();
     } else {
-        //currentTrade[currentSelectSide] = tokens[address];
         console.log("Using default token address: " + tokens[address].name);
         if (currentSelectSide == 'from') {
             fromToken = tokens[address];
@@ -173,7 +165,6 @@ async function login() {
         document.getElementById("login_button").innerText = "Logout";
         logged_in = true;
     } catch (error) {
-        //document.getElementById("login_button").innerText = "Logout";
         console.log(error);
     }
 }
@@ -202,7 +193,6 @@ async function searchForToken() {
     var bar = document.getElementById("tokenSearch");
     let searchedTokenAddress = bar.value;
     const options = { chain: "bsc", addresses: searchedTokenAddress };
-    //closeModal();
     let searchedTokenMetaData = await token_obj.getTokenMetadata(options);
     if (searchedTokenMetaData) {
         listSearchedTokens(searchedTokenMetaData[0]);
@@ -212,7 +202,6 @@ async function searchForToken() {
 function setSlippage() {
     var slipinput = document.getElementById("slippage");
     slippage = slipinput.value;
-    //document.getElementById("slippage").innerText = slipinput.value;
     console.log(slippage);
 }
 
@@ -260,8 +249,6 @@ async function trySwap() {
             fromAddress: address, // Your wallet address
             amount: amount,
         });
-
-        console.log(allowance + "This is allowance");
 
         if (!allowance) {
             if (!custom_coin) {

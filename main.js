@@ -110,7 +110,6 @@ async function listAvailableTokens() {
         div.onclick = () => {
             selectToken(address);
         };
-        //Dont know WTF this does.
         parent.appendChild(div);
     }
 }
@@ -201,7 +200,7 @@ async function searchForToken() {
     custom_coin = true;
     var bar = document.getElementById("tokenSearch");
     let searchedTokenAddress = bar.value;
-    document.getElementById("testing").innerText = searchedTokenAddress;
+    //document.getElementById("testing").innerText = searchedTokenAddress;
     const options = { chain: "bsc", addresses: searchedTokenAddress };
     //closeModal();
     let searchedTokenMetaData = await token_obj.getTokenMetadata(options);

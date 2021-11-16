@@ -285,12 +285,21 @@ async function trySwap() {
     }
     try {
         let receipt = await doSwap(address, amount);
-        console.log(JSON.stringify(receipt));
-        alert("Swap Complete");
+        console.log(receipt);
+        rtest = receipt;
+        //console.log(JSON.stringify(receipt));
+        //var myWindow = window.open("", "MsgWindow", "width=200, height=100")
+        //myWindow.document.write("<p>This is 'MsgWindow'. I am 200px wide and 100px tall!</p>");
+        //alert("Swap Complete");
+        txHistory();
     } catch (error) {
         console.log(error);
     }
 }
+
+//function recentTransaction() {
+//    document.getElementById("test3").innerHTML  ('<a href="https://bscscan.com/tx/' + rtest.transactionHash + '">OPEN ME</a>');
+//}
 
 function doSwap(userAddress, amount) {
     return Moralis.Plugins.oneInch.swap({
@@ -303,6 +312,11 @@ function doSwap(userAddress, amount) {
     });
 }
 
+function txHistory() {
+    document.getElementById("test3").innerHTML = "W3Schools";
+    document.getElementById("test3").href = "https://www.w3schools.com";
+    document.getElementById("test3").target = "_blank";
+}
 init();
 
 document.getElementById("modal_close").onclick = closeModal;

@@ -25,7 +25,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#" id="lg">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="https://satoshiba.club/" id="lg">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li>
                     <a class="nav-link" href="#" id="lg">Report A Bug <span class="sr-only">(current)</span></a>
@@ -42,8 +42,8 @@
             <div class="swapboxwindow" id="window">
                 <h4>SatoSwap - Early Alpha Release</h4>
                 <div class="slip">
-                    <label for="slippage">Slippage:</label>
-                    <input type="text" id="slippage" name="slippage" placeholder="%" size="1">
+                    <label for="slippage">MUST SET MANUAL Slippage:</label>
+                    <input class="slipinput" type="text" id="slippage" name="slippage" placeholder="%" size="1">
                 </div>
                 <div id="form">
                     <div class="swapbox" id="swap-from">
@@ -88,8 +88,12 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div>
-                        <input type="text" id="tokenSearch" class="searchbar" placeholder="Custom Token..">
-                        <button id="search_button" class="searchbutton" type="submit">Search</button>
+                        <div class="searchbardiv">
+                            <input type="text" id="tokenSearch" class="searchbar" placeholder="Custom Token..">
+                        </div>
+                        <div>
+                            <button id="search_button" class="searchbutton" type="submit">Search</button>
+                        </div>
                     </div>
                     <button id="modal_close" type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>

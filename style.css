@@ -102,8 +102,14 @@
         
         .searchbar {
             margin: auto;
-            width: 100%;
+            width: 200%;
             padding: 10px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        
+        .searchbardiv {
+            padding-bottom: 5px;
         }
         
         .center {
@@ -161,10 +167,37 @@
         }
         
         .searchbutton {
-            border-radius: 5px;
+            border-radius: 10px;
         }
         
         .form-control {
             border-radius: 20px;
             font-weight: 600;
+        }
+        
+        .btn-primary:disabled {
+            color: rgb(0, 0, 0);
+            background-color: #e7a005;
+            border-color: #000000;
+            border-radius: 10px;
+        }
+        
+        .btn-primary {
+            color: rgb(0, 0, 0);
+            background-color: #e7a005;
+            border-color: #000000;
+            border-radius: 10px;
+            font-weight: 700;
+        }
+        
+        .btn-primary:hover {
+            color: #000;
+            background-color: #e7a005;
+            border-color: #000000;
+            font-weight: 700;
+        }
+        
+        .slipinput {
+            border-radius: 20px;
+            padding-left: 10px;
         }

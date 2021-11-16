@@ -247,6 +247,10 @@ async function getQuote() {
 }
 
 async function trySwap() {
+    if (slippage == undefined) {
+        alert("Please set slippage");
+        return;
+    };
     let address = Moralis.User.current().get("ethAddress");
     let amount = Number(
         document.getElementById("from_amount").value *

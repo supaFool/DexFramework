@@ -108,7 +108,6 @@ async function listAvailableTokens() {
         div.onclick = () => {
             selectToken(address);
         };
-        //Dont know WTF this does.
         parent.appendChild(div);
     }
 }
@@ -240,6 +239,10 @@ async function getQuote() {
 }
 
 async function trySwap() {
+    if (slippage == undefined) {
+        alert("Please set slippage");
+        return;
+    };
     let address = Moralis.User.current().get("ethAddress");
     let amount = Number(
         document.getElementById("from_amount").value *

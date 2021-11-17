@@ -273,7 +273,7 @@ async function trySwap() {
     try {
         let receipt = await doSwap(address, amount);
         if (receipt.description == "cannot estimate") {
-            alert("Please Adjust Slippage \nProbably needs to be higher.");
+            alert("Please allow for more slippage.");
         }
         console.log(receipt);
         //alert("Swap Complete");

@@ -56,8 +56,8 @@ async function init() {
 
 //Adds Searched Token info to vars, and prints to console.
 // Will be framework for adding coin to 'modal'
-function listSearchedTokens(found_token) {
-    console.log(found_token.name);
+function listSearchedTokens(found_token, log_tokens) {
+    //console.log(found_token.name);
     const fname = JSON.stringify(found_token.name);
     let fsymbol = found_token.symbol;
     let flogo = found_token.logo;
@@ -66,7 +66,14 @@ function listSearchedTokens(found_token) {
     console.log(fdecimals);
 
     //If statements prevent trying to print a property that has no data.
+    if (log_tokens) {
+        printTokenProps(fname, fsymbol, flogo, faddress, fdecimals);
+    }
 
+    selectToken(found_token);
+}
+
+function printTokenProps(fname, fsymbol, flogo, faddress, fdecimals) {
     console.log("Token Name: " + fname);
 
     if (fsymbol) {
@@ -81,8 +88,6 @@ function listSearchedTokens(found_token) {
     if (fdecimals) {
         console.log("Token Decimals: " + fdecimals);
     }
-
-    selectToken(found_token);
 }
 
 async function listAvailableTokens() {
@@ -206,7 +211,7 @@ async function searchForToken() {
     //closeModal();
     let searchedTokenMetaData = await token_obj.getTokenMetadata(options);
     if (searchedTokenMetaData) {
-        listSearchedTokens(searchedTokenMetaData[0]);
+        listSearchedTokens(searchedTokenMetaData[0], false);
     }
 }
 
@@ -282,8 +287,11 @@ async function trySwap() {
     }
     try {
         let receipt = await doSwap(address, amount);
-        console.log(JSON.stringify(receipt));
-        alert("Swap Complete");
+        if (receipt.description == "cannot estimate") {
+            alert("Please Adjust Slippage \nProbably needs to be higher.");
+        }
+        console.log(receipt);
+        //alert("Swap Complete");
     } catch (error) {
         if (error.code == 4001) {
             alert("Transaction cancelled");

@@ -52,6 +52,8 @@ async function init() {
         logged_in = false;
         document.getElementById("login_button").innerText = "Sign in with Metamask";
     }
+
+    txHistory();
 }
 
 //Adds Searched Token info to vars, and prints to console.
@@ -313,9 +315,12 @@ function doSwap(userAddress, amount) {
 }
 
 function txHistory() {
-    document.getElementById("test3").innerHTML = "W3Schools";
-    document.getElementById("test3").href = "https://www.w3schools.com";
-    document.getElementById("test3").target = "_blank";
+    var url = "https://bscscan.com/tx/";
+    var tId = rtest.transactionHash;
+
+
+
+    document.getElementById("test3").innerHTML = " <a href='" + url + tId + "'>" + "View Transaction" + "</a> ";
 }
 init();
 

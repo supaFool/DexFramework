@@ -42,6 +42,7 @@ async function init() {
     //If user is not logged in
     else {
         logged_in = false;
+        document.getElementById("swap_button").disabled = true;
         document.getElementById("login_button").innerText = "Sign in with Metamask";
     }
 }
@@ -162,6 +163,8 @@ async function login() {
         if (!currentUser) {
             document.getElementById("login_button").innerText = "Authenticating...";
             currentUser = await Moralis.authenticate();
+            document.getElementById("swap_button").disabled = false;
+
         } else {
             logOut();
         }
@@ -175,6 +178,8 @@ async function login() {
 async function logOut() {
     currentUser = await Moralis.User.logOut();
     document.getElementById("login_button").innerText = "Log In";
+    document.getElementById("swap_button").disabled = true;
+
     logged_in = false;
 }
 

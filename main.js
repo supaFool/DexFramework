@@ -283,7 +283,7 @@ async function trySwap() {
     try {
         let receipt = await doSwap(address, amount);
         console.log(JSON.stringify(receipt));
-        alert("Swap Complete");
+        //alert("Swap Complete");
     } catch (error) {
         if (error.code == 4001) {
             alert("Transaction cancelled");

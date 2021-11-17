@@ -3,14 +3,10 @@ const appId = "SJlvpL4zKheiaYlFnUpSL5ozOZsq7D7Q45nbwckX"; // Application id from
 
 //If searching for a cutom coin = true
 var custom_coin = false;
-
-//Temp var, will probably delete
 var from;
 
-//'from' or 'to'
+//let currentTrade = {};
 let currentSelectSide;
-
-
 let tokens;
 let fromToken;
 let toToken;
@@ -19,7 +15,6 @@ let slippage;
 //This is being used to hold the Web3API namespace
 let token_obj;
 
-//keeps track of if a user is logged in.
 let logged_in;
 
 //Called when site is loading.
@@ -31,12 +26,25 @@ async function init() {
     token_obj = await Moralis.Web3API.token;
     currentUser = Moralis.User.current();
 
-    //document.getElementById("slippage").value = slippage;
     //If User is logged in
     if (currentUser) {
         logged_in = true;
         document.getElementById("swap_button").disabled = false;
         document.getElementById("login_button").innerText = "Logout";
+
+        //Option being used by Web3API.token search.
+        //We will add the Search value to the 'address'
+        //const options = { chain: "bsc", addresses: searchedTokenAddress };
+
+        //Sets what Web3 sends back in a Var
+        //let tokenMetadata = await token_obj.getTokenMetadata(options);
+
+        //Since it is only returning one token, set the index to '0', and grab that tokens name, and add to Div under swap box
+        //document.getElementById("testing").innerText = tokenMetadata[0].name;
+
+        //log all data recieved from Web3API
+        //console.log(JSON.stringify(tokenMetadata) + "This is current trade");
+        //listSearchedTokens(tokenMetadata[0]);
     }
 
     //If user is not logged in
@@ -48,25 +56,17 @@ async function init() {
 
 //Adds Searched Token info to vars, and prints to console.
 // Will be framework for adding coin to 'modal'
-function listSearchedTokens(found_token, log_tokens) {
-    //console.log(found_token.name);
+function listSearchedTokens(found_token) {
+    console.log(found_token.name);
     const fname = JSON.stringify(found_token.name);
     let fsymbol = found_token.symbol;
     let flogo = found_token.logo;
     let faddress = found_token.address;
     let fdecimals = found_token.decimals;
+    console.log(fdecimals);
 
     //If statements prevent trying to print a property that has no data.
-    if (log_tokens) {
-        printTokenProps(fname, fsymbol, flogo, faddress, fdecimals);
-    }
 
-    selectToken(found_token);
-}
-
-function printTokenProps(fname, fsymbol, flogo, faddress, fdecimals) {
-    console.log("Token Name: " + fname);
-    console.log("Token Name: " + fname);
     console.log("Token Name: " + fname);
 
     if (fsymbol) {
@@ -81,6 +81,8 @@ function printTokenProps(fname, fsymbol, flogo, faddress, fdecimals) {
     if (fdecimals) {
         console.log("Token Decimals: " + fdecimals);
     }
+
+    selectToken(found_token);
 }
 
 async function listAvailableTokens() {
@@ -115,21 +117,23 @@ async function listAvailableTokens() {
 //Gets called when the token is clicked from the modal
 async function selectToken(address) {
     closeModal();
+    console.log(address.name);
 
     if (custom_coin) {
-        console.log("Buying token: " + address.name);
+        console.log("Using custom token address: " + address.name);
         if (currentSelectSide == 'from') {
             fromToken = address;
         }
         if (currentSelectSide == 'to') {
             toToken = address;
         }
+        console.log(fromToken + "This is the log I added");
         //currentTrade[currentSelectSide] = address;
         renderInterface();
         getQuote();
     } else {
         //currentTrade[currentSelectSide] = tokens[address];
-        console.log("Using from token: " + tokens[address].name);
+        console.log("Using default token address: " + tokens[address].name);
         if (currentSelectSide == 'from') {
             fromToken = tokens[address];
         }
@@ -168,6 +172,7 @@ async function login() {
         document.getElementById("login_button").innerText = "Logout";
         logged_in = true;
     } catch (error) {
+        //document.getElementById("login_button").innerText = "Logout";
         console.log(error);
     }
 }
@@ -195,16 +200,19 @@ async function searchForToken() {
     custom_coin = true;
     var bar = document.getElementById("tokenSearch");
     let searchedTokenAddress = bar.value;
+    //document.getElementById("testing").innerText = searchedTokenAddress;
     const options = { chain: "bsc", addresses: searchedTokenAddress };
+    //closeModal();
     let searchedTokenMetaData = await token_obj.getTokenMetadata(options);
     if (searchedTokenMetaData) {
-        listSearchedTokens(searchedTokenMetaData[0], false);
+        listSearchedTokens(searchedTokenMetaData[0]);
     }
 }
 
 function setSlippage() {
     var slipinput = document.getElementById("slippage");
     slippage = slipinput.value;
+    //document.getElementById("slippage").innerText = slipinput.value;
     console.log(slippage);
 }
 
@@ -257,6 +265,8 @@ async function trySwap() {
             amount: amount,
         });
 
+        console.log(allowance + "This is allowance");
+
         if (!allowance) {
             if (!custom_coin) {
                 await Moralis.Plugins.oneInch.approve({
@@ -275,32 +285,25 @@ async function trySwap() {
     }
     try {
         let receipt = await doSwap(address, amount);
-        if (receipt.description == "cannot estimate") {
-            alert("Please allow for more slippage.");
-        }
-        console.log(receipt);
+        console.log(JSON.stringify(receipt));
         //alert("Swap Complete");
     } catch (error) {
         if (error.code == 4001) {
-            alert("Transaction cancelled");
+            alert("Transaction Cancelled by User");
         }
-        console.log(error);
+        //console.log(error);
     }
 }
 
 function doSwap(userAddress, amount) {
-    if (slippage) {
-        return Moralis.Plugins.oneInch.swap({
-            chain: "bsc", // The blockchain you want to use (eth/bsc/polygon)
-            fromTokenAddress: fromToken.address, // The token you want to swap
-            toTokenAddress: toToken.address, // The token you want to receive
-            amount: amount,
-            fromAddress: userAddress, // Your wallet address
-            slippage: slippage,
-        });
-    } else {
-        alert("Please Set Slippage");
-    }
+    return Moralis.Plugins.oneInch.swap({
+        chain: "bsc", // The blockchain you want to use (eth/bsc/polygon)
+        fromTokenAddress: fromToken.address, // The token you want to swap
+        toTokenAddress: toToken.address, // The token you want to receive
+        amount: amount,
+        fromAddress: userAddress, // Your wallet address
+        slippage: slippage,
+    });
 }
 
 init();

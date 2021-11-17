@@ -63,7 +63,6 @@ function listSearchedTokens(found_token, log_tokens) {
     let flogo = found_token.logo;
     let faddress = found_token.address;
     let fdecimals = found_token.decimals;
-    console.log(fdecimals);
 
     //If statements prevent trying to print a property that has no data.
     if (log_tokens) {
@@ -123,23 +122,21 @@ async function listAvailableTokens() {
 //Gets called when the token is clicked from the modal
 async function selectToken(address) {
     closeModal();
-    console.log(address.name);
 
     if (custom_coin) {
-        console.log("Using custom token address: " + address.name);
+        console.log("Buying token: " + address.name);
         if (currentSelectSide == 'from') {
             fromToken = address;
         }
         if (currentSelectSide == 'to') {
             toToken = address;
         }
-        console.log(fromToken + "This is the log I added");
         //currentTrade[currentSelectSide] = address;
         renderInterface();
         getQuote();
     } else {
         //currentTrade[currentSelectSide] = tokens[address];
-        console.log("Using default token address: " + tokens[address].name);
+        console.log("Using from token: " + tokens[address].name);
         if (currentSelectSide == 'from') {
             fromToken = tokens[address];
         }

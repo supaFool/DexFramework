@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -13,34 +12,40 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="./style.css">
     <link rel="icon" href="https://tokyomoon.digital/wp-content/uploads/2021/11/cropped-Text_Logo.png">
-</head>
-
-<body style="background-color:#1B4965;">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">SatoSwap</a>
+  </head>
+  <style>
+    body {
+      background-image: url('http://45.79.223.13/Media/TmoonBG.png');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+    </style>
+    <nav class="navbar navbar-expand-lg navbar-darkbg-dark">
+        <a class="navbar-brand" href="#">MoonSwap</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#" id="lg">Home <span class="sr-only">(current)</span></a>
-                </li>
-            </ul>
-            <button id="login_button" class="btn btn-outline-primary my-2 my-sm-0" type="submit"></button>
-        </div>
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#" id="lg">Home <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+        <button id="login_button" class="btn btn-outline-primary my-2 my-sm-0" type="submit"></button>
+      </div>
     </nav>
     <div class="container">
         <div class="row">
             <div class="col col-md-6 offset-md-3" id="window">
                 <h4>MoonSwap</h4>
-                <div class="slip">
+                  <div class="slip">
                     <label for="slippage">Slippage:</label>
                     <input type="text" id="slippage" name="slippage" placeholder="%" size="1">
-                </div>
-                <div id="form">
-                    <div class="swapbox" id="swap-from">
+                  </div>
+                  <div id="form">
+                    <div class="swapbox">
                         <div class="swapbox_select token_select" id="from_token_select">
                             <img class="token_image" id="from_token_img">
                             <span id="from_token_text">Select Token</span>
@@ -49,8 +54,8 @@
                             <input class="number form-control" placeholder="amount" id="from_amount">
                         </div>
                     </div>
-                    <div class="swapbox" id="swap-to">
-                        <div class="swapbox_select token_select" id="to_token_select">
+                    <div class="swapbox">
+                        <div class="swapbox_select token_select"  id="to_token_select">
                             <img class="token_image" id="to_token_img">
                             <span id="to_token_text">Select Token</span>
                         </div>
@@ -64,33 +69,32 @@
                     </button>
                 </div>
             </div>
+          </div>
         </div>
-    </div>
-    </div>
+      </div>
     </div>
     <div id="testing">
 
     </div>
     <div class="modal" id="token_modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div>
-                        <input type="text" id="tokenSearch" class="searchbar" placeholder="Custom Token..">
-                        <button id="search_button" class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-                    </div>
-                    <button id="modal_close" type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div>
+              <input type="text" id="tokenSearch" class="searchbar" placeholder="Custom Token..">
+              <button id="search_button" class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+            </div>
+            <button id="modal_close" type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-                </div>
-                <div class="modal-body">
-                    <div id="token_list"></div>
-                </div>
-            </div>
+          </div>
+          <div class="modal-body">
+            <div id="token_list"></div>
+          </div>
         </div>
+      </div>
     </div>
-
+    
     <script type="text/javascript" src="./main.js"></script>
-</body>
-
+  </body>
 </html>

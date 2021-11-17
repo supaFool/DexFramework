@@ -14,61 +14,60 @@
     <link rel="stylesheet" href="./style.css">
     <link rel="icon" href="https://satoshiba.club/wp-content/uploads/2021/10/cropped-FavIco.png">
 </head>
+<style>
+    body {
+        background-image: url('http://45.79.223.13/Media/TmoonBG.png');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+<nav class="navbar navbar-expand-lg navbar-darkbg-dark">
+    <a class="navbar-brand" href="#">MoonSwap</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-<body style="background-color:#000000;">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">SatoSwap</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="https://satoshiba.club/" id="lg">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li>
-                    <a class="nav-link" href="https://forms.gle/fA2Eo4FiPnVHtBA69" id="lg">Report A Bug <span class="sr-only">(current)</span></a>
-                </li>
-            </ul>
-            <button id="login_button" class="btn btn-outline-primary my-2 my-sm-0" type="submit"></button>
-        </div>
-    </nav>
-    <div>
-        <img class="satocoin" src="https://satoshiba.club/wp-content/uploads/2021/10/Loading.gif" alt="SatoSwap Coin">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#" id="lg">Home <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+        <button id="login_button" class="btn btn-outline-primary my-2 my-sm-0" type="submit"></button>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="swapboxwindow" id="window">
-                <h4>SatoSwap - Early Alpha Release</h4>
-                <div class="slip">
-                    <label for="slippage">Slippage:</label>
-                    <input class="slipinput" type="text" id="slippage" name="slippage" placeholder="%" size="1">
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col col-md-6 offset-md-3" id="window">
+            <h4>MoonSwap</h4>
+            <div class="slip">
+                <label for="slippage">Slippage:</label>
+                <input type="text" id="slippage" name="slippage" autocomplete="off" placeholder="%" size="1">
+            </div>
+            <div id="form">
+                <div class="swapbox">
+                    <div class="swapbox_select token_select" id="from_token_select">
+                        <img class="token_image" id="from_token_img">
+                        <span id="from_token_text">Select Token</span>
+                    </div>
+                    <div class="swapbox_select">
+                        <input class="number form-control" placeholder="amount" id="from_amount" autocomplete="off">
+                    </div>
                 </div>
-                <div id="form">
-                    <div class="swapbox" id="swap-from">
-                        <div class="swapbox_select token_select" id="from_token_select">
-                            <img class="token_image" id="from_token_img">
-                            <span id="from_token_text">Select Token</span>
-                        </div>
-                        <div class="swapbox_select">
-                            <input class="number form-control" placeholder="amount" id="from_amount">
-                        </div>
+                <div class="swapbox">
+                    <div class="swapbox_select token_select" id="to_token_select">
+                        <img class="token_image" id="to_token_img">
+                        <span id="to_token_text">Select Token</span>
                     </div>
-                    <div class="swapbox" id="swap-to">
-                        <div class="swapbox_select token_select" id="to_token_select">
-                            <img class="token_image" id="to_token_img">
-                            <span id="to_token_text">Select Token</span>
-                        </div>
-                        <div class="swapbox_select">
-                            <input class="number form-control" placeholder="amount" id="to_amount">
-                        </div>
+                    <div class="swapbox_select">
+                        <input class="number form-control" placeholder="amount" id="to_amount" autocomplete="off">
                     </div>
-                    <div>Estimated Gas: <span id="gas_estimate"></span></div>
-                    <button disabled class="btn btn-large btn-primary btn-block" id="swap_button">
+                </div>
+                <div>Estimated Gas: <span id="gas_estimate"></span></div>
+                <button disabled class="btn btn-large btn-primary btn-block" id="swap_button">
                         Swap
                     </button>
-                </div>
             </div>
             <div class="satobg">
                 <img class="satoshibamoon" src="https://satoshiba.club/wp-content/uploads/2021/10/moon.svg" alt="SatoShiba Moon">
@@ -76,37 +75,32 @@
             </div>
         </div>
     </div>
-    <div>
-    </div>
-    </div>
-    </div>
-    <div id="testing">
+</div>
+</div>
+</div>
+<div id="testing">
 
-    </div>
-    <div class="modal" id="token_modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div>
-                        <div class="searchbardiv">
-                            <input type="text" id="tokenSearch" class="searchbar" placeholder="Custom Token..">
-                        </div>
-                        <div>
-                            <button id="search_button" class="searchbutton" type="submit">Search</button>
-                        </div>
-                    </div>
-                    <button id="modal_close" type="button" class="close" data-dismiss="modal" aria-label="Close">
+</div>
+<div class="modal" id="token_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <input type="text" id="tokenSearch" class="searchbar" placeholder="Custom Token..">
+                    <button id="search_button" class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+                </div>
+                <button id="modal_close" type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-                </div>
-                <div class="modal-body">
-                    <div id="token_list"></div>
-                </div>
+            </div>
+            <div class="modal-body">
+                <div id="token_list"></div>
             </div>
         </div>
     </div>
+</div>
 
-    <script type="text/javascript" src="./main.js"></script>
+<script type="text/javascript" src="./main.js"></script>
 </body>
 
 </html>

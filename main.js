@@ -14,7 +14,7 @@ let currentSelectSide;
 let tokens;
 let fromToken;
 let toToken;
-let slippage = 15;
+let slippage;
 
 //This is being used to hold the Web3API namespace
 let token_obj;
@@ -31,7 +31,7 @@ async function init() {
     token_obj = await Moralis.Web3API.token;
     currentUser = Moralis.User.current();
 
-    document.getElementById("slippage").value = slippage;
+    //document.getElementById("slippage").value = slippage;
     //If User is logged in
     if (currentUser) {
         logged_in = true;

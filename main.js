@@ -285,19 +285,26 @@ async function trySwap() {
         console.log(JSON.stringify(receipt));
         alert("Swap Complete");
     } catch (error) {
+        if (error.code == 4001) {
+            alert("Transaction cancelled");
+        }
         console.log(error);
     }
 }
 
 function doSwap(userAddress, amount) {
-    return Moralis.Plugins.oneInch.swap({
-        chain: "bsc", // The blockchain you want to use (eth/bsc/polygon)
-        fromTokenAddress: fromToken.address, // The token you want to swap
-        toTokenAddress: toToken.address, // The token you want to receive
-        amount: amount,
-        fromAddress: userAddress, // Your wallet address
-        slippage: slippage,
-    });
+    if (slippage) {
+        return Moralis.Plugins.oneInch.swap({
+            chain: "bsc", // The blockchain you want to use (eth/bsc/polygon)
+            fromTokenAddress: fromToken.address, // The token you want to swap
+            toTokenAddress: toToken.address, // The token you want to receive
+            amount: amount,
+            fromAddress: userAddress, // Your wallet address
+            slippage: slippage,
+        });
+    } else {
+        alert("Please Set Slippage");
+    }
 }
 
 init();

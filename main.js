@@ -172,12 +172,15 @@ async function login() {
         document.getElementById("login_button").innerText = "Logout";
         logged_in = true;
     } catch (error) {
-        console.log(error);
+        if (error.message == "MetaMask Message Signature: User denied message signature.") {
+            alert("Login cancelled")
+            document.getElementById("login_button").innerText = "Sign in with Metamask";
+        }
     }
 }
 async function logOut() {
     currentUser = await Moralis.User.logOut();
-    document.getElementById("login_button").innerText = "Log In";
+    document.getElementById("login_button").innerText = "Sign in with Metamask";
     document.getElementById("swap_button").disabled = true;
 
     logged_in = false;

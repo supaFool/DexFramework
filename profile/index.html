@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Profile - Early Alpha</title>
+    <title>MoonSwap - Early Alpha</title>
     <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" inte0xe907e365c5bc5008d14ef5df08b31d7bbba3b171grity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/moralis/dist/moralis.js"></script>
@@ -27,6 +27,9 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="https://tokyomoon.digital/" id="lg">Home <span class="sr-only">(current)</span></a>
                 </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="http://127.0.0.1:5501/profile/" id="lg">Profile <span class="sr-only">(current)</span></a>
+                </li>
                 <li>
                     <a class="nav-link" href="#" id="lg">Report A Bug <span class="sr-only">(current)</span></a>
                 </li>
@@ -34,77 +37,8 @@
             <button id="login_button" class="btn btn-outline-primary my-2 my-sm-0" type="submit"></button>
         </div>
     </nav>
-    <div>
-        <img class="satocoin" src="https://tokyomoon.digital/wp-content/uploads/2021/11/Text.png" alt="TokyoMoon Logo">
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="swapboxwindow" id="window">
-                <h4>MoonSwap - Early Alpha Release</h4>
-                <div class="slip">
-                    <label for="slippage">Slippage:</label>
-                    <input class="slipinput" type="text" id="slippage" name="slippage" placeholder="%" size="1">
-                </div>
-                <div id="test3">
-                </div>
-                <div id="form">
-                    <div class="swapbox" id="swap-from">
-                        <div class="swapbox_select token_select" id="from_token_select">
-                            <img class="token_image" id="from_token_img">
-                            <span id="from_token_text">Select Token</span>
-                        </div>
-                        <div class="swapbox_select">
-                            <input class="number form-control" placeholder="amount" id="from_amount">
-                        </div>
-                    </div>
-                    <div class="swapbox" id="swap-to">
-                        <div class="swapbox_select token_select" id="to_token_select">
-                            <img class="token_image" id="to_token_img">
-                            <span id="to_token_text">Select Token</span>
-                        </div>
-                        <div class="swapbox_select">
-                            <input class="number form-control" placeholder="amount" id="to_amount">
-                        </div>
-                    </div>
-                    <div>Estimated Gas: <span id="gas_estimate"></span></div>
-                    <button disabled class="btn btn-large btn-primary btn-block" id="swap_button">
-                        Swap
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div>
-    </div>
-    </div>
-    </div>
-    <div id="testing">
 
-    </div>
-    <div class="modal" id="token_modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div>
-                        <div class="searchbardiv">
-                            <input type="text" id="tokenSearch" class="searchbar" placeholder="Custom Token..">
-                        </div>
-                        <div>
-                            <button id="search_button" class="searchbutton" type="submit">Search</button>
-                        </div>
-                    </div>
-                    <button id="modal_close" type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-                </div>
-                <div class="modal-body">
-                    <div id="token_list"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script type="text/javascript" src="./main.js">
+    <script type="text/javascript" src="./profile.js">
     </script>
 </body>
 

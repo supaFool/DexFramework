@@ -129,6 +129,16 @@
             margin-bottom: -100px;
         }
         
+        .satocointop {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 10%;
+            height: 10%;
+            padding-top: 10px;
+            margin-bottom: -100px;
+        }
+        
         .satoshibamascot {
             position: relative;
             top: 0;

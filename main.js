@@ -245,6 +245,17 @@ async function getQuote() {
     document.getElementById("gas_estimate").innerHTML = quote.estimatedGas;
     document.getElementById("to_amount").value =
         quote.toTokenAmount / 10 ** toToken.decimals;
+    //Fixes quote not auto updating on NaN
+    if (document.getElementById("to_amount").value == "NaN") {
+        //console.log("Calling get Quote again");
+        getQuote();
+        document.getElementById("to_amount").value == "";
+    };
+    if (document.getElementById("from_amount").value == "NaN") {
+        //console.log("Calling get Quote again");
+        getQuote();
+        document.getElementById("from_amount").value == "";
+    };
 }
 async function getQuoteReverse() {
     //If any of the input fields are empty, then dont do anything

@@ -1,12 +1,12 @@
         #window {
             margin-top: 50px;
-            background-color: #05756163;
+            background-color: #060381da;
             color: #e08104;
             padding: 15px;
             border-radius: 20px;
             box-shadow: 0 0 5px black;
-            float: left;
-            margin-left: 10px;
+            margin-right: auto;
+            margin-left: auto;
             height: 400px;
         }
         
@@ -23,7 +23,7 @@
             overflow: auto;
             margin: 20px 0;
             padding: 20px;
-            background-color: #e7a005;
+            background-color: #e08104ea;
             border-radius: 20px;
             border: 1px solid #565656;
         }
@@ -35,7 +35,7 @@
         }
         
         .token_select:hover {
-            background-color: #05756163;
+            background-color: #a406b963;
             cursor: pointer;
             border-radius: 20px;
         }
@@ -126,6 +126,7 @@
             width: 10%;
             height: 10%;
             padding-top: 80px;
+            margin-bottom: -100px;
         }
         
         .satoshibamascot {
@@ -200,4 +201,9 @@
         .slipinput {
             border-radius: 20px;
             padding-left: 10px;
+        }
+        
+        .tmbg {
+            background-position: top;
+            background-size: cover;
         }

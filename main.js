@@ -281,6 +281,8 @@ async function trySwap() {
             alert("Please allow for more slippage.");
         }
         console.log(receipt);
+        rtest = receipt;
+        txHistory();
         //alert("Swap Complete");
     } catch (error) {
         if (error.code == 4001) {
@@ -303,6 +305,15 @@ function doSwap(userAddress, amount) {
     } else {
         alert("Please Set Slippage");
     }
+}
+
+function txHistory() {
+    var url = "https://bscscan.com/tx/";
+    var tId = rtest.transactionHash;
+
+
+
+    document.getElementById("test3").innerHTML = " <a href='" + url + tId + "'>" + "View Transaction" + "</a> ";
 }
 
 init();

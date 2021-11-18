@@ -6,14 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>MoonSwap - Early Alpha</title>
+
     <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" inte0xe907e365c5bc5008d14ef5df08b31d7bbba3b171grity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/moralis/dist/moralis.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="./style.css">
     <link rel="icon" href="https://tokyomoon.digital/wp-content/uploads/2021/11/cropped-Text_Logo.png">
 </head>
+<style>
+    body {
+        background-image: url('http://45.79.223.13/Media/TmoonBG.png');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+<nav class="navbar navbar-expand-lg navbar-darkbg-dark">
+    <a class="navbar-brand" href="#">MoonSwap</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
 
 <body class="tmbg" style="background-image: url(https://tokyomoon.digital/wp-content/uploads/2021/11/background.png)">
     <nav style="background-color: transparent;" class="navbar navbar-expand-lg navbar-dark">
@@ -56,56 +71,49 @@
                         <div class="swapbox_select">
                             <input class="number form-control" placeholder="amount" id="from_amount">
                         </div>
+
                     </div>
-                    <div class="swapbox" id="swap-to">
-                        <div class="swapbox_select token_select" id="to_token_select">
-                            <img class="token_image" id="to_token_img">
-                            <span id="to_token_text">Select Token</span>
-                        </div>
-                        <div class="swapbox_select">
-                            <input class="number form-control" placeholder="amount" id="to_amount">
-                        </div>
+                    <div class="swapbox_select">
+                        <input class="number form-control" placeholder="amount" id="to_amount" autocomplete="off">
                     </div>
-                    <div>Estimated Gas: <span id="gas_estimate"></span></div>
-                    <button disabled class="btn btn-large btn-primary btn-block" id="swap_button">
+                </div>
+                <div>Estimated Gas: <span id="gas_estimate"></span></div>
+                <button disabled class="btn btn-large btn-primary btn-block" id="swap_button">
                         Swap
                     </button>
                 </div>
+
             </div>
         </div>
     </div>
-    <div>
-    </div>
-    </div>
-    </div>
-    <div id="testing">
+</div>
+</div>
+</div>
+<div id="testing">
 
-    </div>
-    <div class="modal" id="token_modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div>
-                        <div class="searchbardiv">
-                            <input type="text" id="tokenSearch" class="searchbar" placeholder="Custom Token..">
-                        </div>
-                        <div>
-                            <button id="search_button" class="searchbutton" type="submit">Search</button>
-                        </div>
-                    </div>
-                    <button id="modal_close" type="button" class="close" data-dismiss="modal" aria-label="Close">
+</div>
+<div class="modal" id="token_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <input type="text" id="tokenSearch" class="searchbar" placeholder="Custom Token..">
+                    <button id="search_button" class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+                </div>
+                <button id="modal_close" type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-                </div>
-                <div class="modal-body">
-                    <div id="token_list"></div>
-                </div>
+            </div>
+            <div class="modal-body">
+                <div id="token_list"></div>
             </div>
         </div>
     </div>
+</div>
 
     <script type="text/javascript" src="./main.js">
     </script>
+
 </body>
 
 </html>

@@ -237,7 +237,33 @@ async function getQuote() {
     document.getElementById("to_amount").value =
         quote.toTokenAmount / 10 ** toToken.decimals;
 }
+async function getQuoteReverse() {
+    //If any of the input fields are empty, then dont do anything
+    if (!fromToken ||
+        !toToken ||
+        !document.getElementById("to_amount").value
+    )
+        return;
 
+    // Convert the input text to the tenth power
+    let amount = Number(
+        document.getElementById("to_amount").value *
+        10 ** fromToken.decimals
+    );
+
+    //set the quote const to whatever oneInch returns when it asks for the quote.
+    const quote = await Moralis.Plugins.oneInch.quote({
+        chain: "bsc", // The blockchain you want to use (eth/bsc/polygon)
+        fromTokenAddress: toToken.address, // The token you want to swap
+        toTokenAddress: fromToken.address, // The token you want to swapreceive
+        //Amount of tokens you want to swap from
+        amount: amount,
+    });
+    // console.log(JSON.stringify(quote.toToken.decimals) + "This is the qoute");
+    document.getElementById("gas_estimate").innerHTML = quote.estimatedGas;
+    document.getElementById("from_amount").value =
+        quote.toTokenAmount / 10 ** toToken.decimals;
+}
 async function trySwap() {
     if (slippage == undefined) {
         alert("Please set slippage");
@@ -326,6 +352,7 @@ document.getElementById("to_token_select").onclick = () => {
 };
 document.getElementById("login_button").onclick = login;
 document.getElementById("from_amount").oninput = getQuote;
+document.getElementById("to_amount").oninput = getQuoteReverse;
 document.getElementById("swap_button").onclick = trySwap;
 document.getElementById("search_button").onclick = searchForToken;
 document.getElementById("slippage").oninput = setSlippage;

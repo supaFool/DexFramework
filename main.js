@@ -42,6 +42,7 @@ async function init() {
     //If user is not logged in
     else {
         logged_in = false;
+        document.getElementById("swap_button").disabled = true;
         document.getElementById("login_button").innerText = "Sign in with Metamask";
     }
 }
@@ -108,6 +109,7 @@ async function listAvailableTokens() {
         div.onclick = () => {
             selectToken(address);
         };
+        //Dont know WTF this does.
         parent.appendChild(div);
     }
 }
@@ -161,6 +163,8 @@ async function login() {
         if (!currentUser) {
             document.getElementById("login_button").innerText = "Authenticating...";
             currentUser = await Moralis.authenticate();
+            document.getElementById("swap_button").disabled = false;
+
         } else {
             logOut();
         }
@@ -168,12 +172,17 @@ async function login() {
         document.getElementById("login_button").innerText = "Logout";
         logged_in = true;
     } catch (error) {
-        console.log(error);
+        if (error.message == "MetaMask Message Signature: User denied message signature.") {
+            alert("Login cancelled")
+            document.getElementById("login_button").innerText = "Sign in with Metamask";
+        }
     }
 }
 async function logOut() {
     currentUser = await Moralis.User.logOut();
-    document.getElementById("login_button").innerText = "Log In";
+    document.getElementById("login_button").innerText = "Sign in with Metamask";
+    document.getElementById("swap_button").disabled = true;
+
     logged_in = false;
 }
 
@@ -211,7 +220,7 @@ function setSlippage() {
 //Gets the Quote of Gas, and swap exchange rate. This is what is called when
 //typing the in 'Amount' input field
 async function getQuote() {
-    //If any of the input fields are empty, the0xae3fE7bB963e9A3274061818EA54466E123B1772n dont do anything
+    //If any of the input fields are empty, then dont do anything
     if (!fromToken ||
         !toToken ||
         !document.getElementById("from_amount").value
@@ -236,6 +245,17 @@ async function getQuote() {
     document.getElementById("gas_estimate").innerHTML = quote.estimatedGas;
     document.getElementById("to_amount").value =
         quote.toTokenAmount / 10 ** toToken.decimals;
+    //Fixes quote not auto updating on NaN
+    if (document.getElementById("to_amount").value == "NaN") {
+        //console.log("Calling get Quote again");
+        getQuote();
+        document.getElementById("to_amount").value == "";
+    };
+    if (document.getElementById("from_amount").value == "NaN") {
+        //console.log("Calling get Quote again");
+        getQuote();
+        document.getElementById("from_amount").value == "";
+    };
 }
 async function getQuoteReverse() {
     //If any of the input fields are empty, then dont do anything
@@ -265,10 +285,6 @@ async function getQuoteReverse() {
         quote.toTokenAmount / 10 ** toToken.decimals;
 }
 async function trySwap() {
-    if (slippage == undefined) {
-        alert("Please set slippage");
-        return;
-    };
     let address = Moralis.User.current().get("ethAddress");
     let amount = Number(
         document.getElementById("from_amount").value *
@@ -306,6 +322,7 @@ async function trySwap() {
         }
         console.log(receipt);
         rtest = receipt;
+        txHistory();
         //alert("Swap Complete");
         txHistory();
     } catch (error) {

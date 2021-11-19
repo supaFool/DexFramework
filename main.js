@@ -324,7 +324,6 @@ async function trySwap() {
         rtest = receipt;
         txHistory();
         //alert("Swap Complete");
-        txHistory();
     } catch (error) {
         if (error.code == 4001) {
             alert("Transaction cancelled");

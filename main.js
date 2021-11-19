@@ -172,12 +172,15 @@ async function login() {
         document.getElementById("login_button").innerText = "Logout";
         logged_in = true;
     } catch (error) {
-        console.log(error);
+        if (error.message == "MetaMask Message Signature: User denied message signature.") {
+            alert("Login cancelled")
+            document.getElementById("login_button").innerText = "Sign in with Metamask";
+        }
     }
 }
 async function logOut() {
     currentUser = await Moralis.User.logOut();
-    document.getElementById("login_button").innerText = "Log In";
+    document.getElementById("login_button").innerText = "Sign in with Metamask";
     document.getElementById("swap_button").disabled = true;
 
     logged_in = false;
@@ -217,7 +220,7 @@ function setSlippage() {
 //Gets the Quote of Gas, and swap exchange rate. This is what is called when
 //typing the in 'Amount' input field
 async function getQuote() {
-    //If any of the input fields are empty, the0xae3fE7bB963e9A3274061818EA54466E123B1772n dont do anything
+    //If any of the input fields are empty, then dont do anything
     if (!fromToken ||
         !toToken ||
         !document.getElementById("from_amount").value
@@ -242,8 +245,45 @@ async function getQuote() {
     document.getElementById("gas_estimate").innerHTML = quote.estimatedGas;
     document.getElementById("to_amount").value =
         quote.toTokenAmount / 10 ** toToken.decimals;
+    //Fixes quote not auto updating on NaN
+    if (document.getElementById("to_amount").value == "NaN") {
+        //console.log("Calling get Quote again");
+        getQuote();
+        document.getElementById("to_amount").value == "";
+    };
+    if (document.getElementById("from_amount").value == "NaN") {
+        //console.log("Calling get Quote again");
+        getQuote();
+        document.getElementById("from_amount").value == "";
+    };
 }
+async function getQuoteReverse() {
+    //If any of the input fields are empty, then dont do anything
+    if (!fromToken ||
+        !toToken ||
+        !document.getElementById("to_amount").value
+    )
+        return;
 
+    // Convert the input text to the tenth power
+    let amount = Number(
+        document.getElementById("to_amount").value *
+        10 ** fromToken.decimals
+    );
+
+    //set the quote const to whatever oneInch returns when it asks for the quote.
+    const quote = await Moralis.Plugins.oneInch.quote({
+        chain: "bsc", // The blockchain you want to use (eth/bsc/polygon)
+        fromTokenAddress: toToken.address, // The token you want to swap
+        toTokenAddress: fromToken.address, // The token you want to swapreceive
+        //Amount of tokens you want to swap from
+        amount: amount,
+    });
+    // console.log(JSON.stringify(quote.toToken.decimals) + "This is the qoute");
+    document.getElementById("gas_estimate").innerHTML = quote.estimatedGas;
+    document.getElementById("from_amount").value =
+        quote.toTokenAmount / 10 ** toToken.decimals;
+}
 async function trySwap() {
     let address = Moralis.User.current().get("ethAddress");
     let amount = Number(
@@ -281,6 +321,8 @@ async function trySwap() {
             alert("Please allow for more slippage.");
         }
         console.log(receipt);
+        rtest = receipt;
+        txHistory();
         //alert("Swap Complete");
     } catch (error) {
         if (error.code == 4001) {
@@ -305,6 +347,15 @@ function doSwap(userAddress, amount) {
     }
 }
 
+function txHistory() {
+    var url = "https://bscscan.com/tx/";
+    var tId = rtest.transactionHash;
+
+
+
+    document.getElementById("test3").innerHTML = " <a href='" + url + tId + "'>" + "View Transaction" + "</a> ";
+}
+
 init();
 
 document.getElementById("modal_close").onclick = closeModal;
@@ -317,6 +368,7 @@ document.getElementById("to_token_select").onclick = () => {
 };
 document.getElementById("login_button").onclick = login;
 document.getElementById("from_amount").oninput = getQuote;
+document.getElementById("to_amount").oninput = getQuoteReverse;
 document.getElementById("swap_button").onclick = trySwap;
 document.getElementById("search_button").onclick = searchForToken;
 document.getElementById("slippage").oninput = setSlippage;

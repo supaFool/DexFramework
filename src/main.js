@@ -169,7 +169,8 @@ async function renderInterface() {
 
             //Here is the ISSUE
             console.log(global.user_profile.native_bal.balance / 10 ** 18);
-            document.getElementById("from_amount_label").innerText = JSON.parse(global.user_profile.native_bal.balance / 10 ** 18);
+            document.getElementById("bnbdiv").innerText = global.user_profile.native_bal.balance / 10 ** 18;
+            return;
         }
 
         for (let index = 0; index < global.user_profile.balances.length; index++) {
@@ -177,11 +178,11 @@ async function renderInterface() {
             if (id.token_address == fromToken.address) {
                 console.log("Found Balance");
                 console.log("Found " + id.token_address);
-                document.getElementById("from_amount_label").innerText = id.balance / 10 ** id.decimals;
+                document.getElementById("bnbdiv").innerText = id.balance / 10 ** id.decimals;
                 return;
             } else {
                 //console.log("Didnt Find" + id.token_address + " using address: " + fromToken.address);
-                document.getElementById("from_amount_label").innerText = "";
+                document.getElementById("bnbdiv").innerText = "";
             }
         }
     }

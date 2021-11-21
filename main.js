@@ -332,11 +332,11 @@ async function trySwap() {
         console.log(error);
     }
 }
-
+//For clearing text input boxes after swap complete
 function clearAmounts() {
-    document.getElementById("from_amount").innerText = "";
-    document.getElementById("to_amount").innerText = "";
-    document.getElementById("slippage").innerText = "";
+    document.getElementById("from_amount").value = "";
+    document.getElementById("to_amount").value = "";
+    document.getElementById("slippage").value = "";
 }
 
 function doSwap(userAddress, amount) {

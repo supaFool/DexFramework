@@ -31,7 +31,7 @@ async function init() {
     await listAvailableTokens();
 
     token_obj = await Moralis.Web3API.token;
-    currentUser = Moralis.User.current();
+    currentUser = await Moralis.User.current();
     global.user_profile.entity = currentUser;
     //document.getElementById("slippage").value = slippage;
     //If User is logged in

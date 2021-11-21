@@ -1,0 +1,23 @@
+{
+  "name": "dexframework",
+  "version": "0.0.1",
+  "description": "Crypto-Dash",
+  "main": "/src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/supaFool/DexFramework.git"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/supaFool/DexFramework/issues"
+  },
+  "homepage": "https://github.com/supaFool/DexFramework#readme",
+  "dependencies": {
+    "semantic-ui": "^2.4.2"
+  }
+}

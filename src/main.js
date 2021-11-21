@@ -1,3 +1,5 @@
+//import * as helper from './w3Helper.js';
+
 const serverUrl = "https://klpxwezyuiua.usemoralis.com:2053/server"; //Server url from moralis.io
 const appId = "SJlvpL4zKheiaYlFnUpSL5ozOZsq7D7Q45nbwckX"; // Application id from moralis.io
 
@@ -30,13 +32,15 @@ async function init() {
 
     token_obj = await Moralis.Web3API.token;
     currentUser = Moralis.User.current();
-
+    global.user_profile.entity = currentUser;
     //document.getElementById("slippage").value = slippage;
     //If User is logged in
     if (currentUser) {
         logged_in = true;
         document.getElementById("swap_button").disabled = false;
         document.getElementById("login_button").innerText = "Logout";
+        setHelperData();
+        console.log(global.user_profile.born);
     }
 
     //If user is not logged in
@@ -45,6 +49,10 @@ async function init() {
         document.getElementById("swap_button").disabled = true;
         document.getElementById("login_button").innerText = "Sign in with Metamask";
     }
+}
+
+function setHelperData() {
+    global.user_profile.born = JSON.stringify(currentUser.createdAt);
 }
 
 //Adds Searched Token info to vars, and prints to console.
@@ -164,7 +172,7 @@ async function login() {
             document.getElementById("login_button").innerText = "Authenticating...";
             currentUser = await Moralis.authenticate();
             document.getElementById("swap_button").disabled = false;
-
+            setHelperData();
         } else {
             logOut();
         }

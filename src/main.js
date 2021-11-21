@@ -347,21 +347,14 @@ async function trySwap() {
         }
         console.log(receipt);
         rtest = receipt;
-        clearAmounts();
         txHistory();
-        alert("Swap Complete");
+        //alert("Swap Complete");
     } catch (error) {
         if (error.code == 4001) {
             alert("Transaction cancelled");
         }
         console.log(error);
     }
-}
-//For clearing text input boxes after swap complete
-function clearAmounts() {
-    document.getElementById("from_amount").value = "";
-    document.getElementById("to_amount").value = "";
-    document.getElementById("slippage").value = "";
 }
 
 function doSwap(userAddress, amount) {

@@ -322,14 +322,21 @@ async function trySwap() {
         }
         console.log(receipt);
         rtest = receipt;
+        clearAmounts();
         txHistory();
-        //alert("Swap Complete");
+        alert("Swap Complete");
     } catch (error) {
         if (error.code == 4001) {
             alert("Transaction cancelled");
         }
         console.log(error);
     }
+}
+
+function clearAmounts() {
+    document.getElementById("from_amount").innerText = "";
+    document.getElementById("to_amount").innerText = "";
+    document.getElementById("slippage").innerText = "";
 }
 
 function doSwap(userAddress, amount) {

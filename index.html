@@ -17,11 +17,14 @@
 </head>
 
 <body class="tmbg" style="background-image: url(https://tokyomoon.digital/wp-content/uploads/2021/11/background.png)">
+    <!--Side Bar-->
     <nav style="background-color: transparent;" class="navbar navbar-expand-lg navbar-dark">
         <a class="navbar-brand" href="#">MoonSwap</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
@@ -38,73 +41,88 @@
             <button id="login_button" class="btn btn-outline-primary my-2 my-sm-0" type="submit"></button>
         </div>
     </nav>
-    <div>
-        <img class="satocoin" src="https://tokyomoon.digital/wp-content/uploads/2021/11/Text.png" alt="TokyoMoon Logo">
+    <div class="ui sidebar inverted vertical menu">
+        <a class="item">
+            1
+        </a>
+        <a class="item">
+            2
+        </a>
+        <a class="item">
+            3
+        </a>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="swapboxwindow" id="window">
-                <h4>MoonSwap - Early Alpha Release</h4>
-                <div class="slip">
-                    <label for="slippage">Slippage:</label>
-                    <input class="slipinput" type="text" id="slippage" name="slippage" placeholder="%" size="1" autocomplete="off">
-                </div>
-                <div id="test3">
-                </div>
-                <div id="form">
-                    <div class="swapbox" id="swap-from">
-                        <div class="swapbox_select token_select" id="from_token_select">
-                            <img class="token_image" id="from_token_img">
-                            <span id="from_token_text">Select Token</span>
-                        </div>
-                        <div class="swapbox_select">
-                            <input class="number form-control" placeholder="amount" id="from_amount">
-                        </div>
+    <div class="pusher">
+        <div>
+            <img class="satocoin" src="https://tokyomoon.digital/wp-content/uploads/2021/11/Text.png" alt="TokyoMoon Logo">
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="swapboxwindow" id="window">
+                    <h4>MoonSwap - Early Alpha Release</h4>
+                    <div class="slip">
+                        <label for="slippage">Slippage:</label>
+                        <input class="slipinput" type="text" id="slippage" name="slippage" placeholder="%" size="1" autocomplete="off">
                     </div>
-                    <div class="swapbox" id="swap-to">
-                        <div class="swapbox_select token_select" id="to_token_select">
-                            <img class="token_image" id="to_token_img">
-                            <span id="to_token_text">Select Token</span>
-                        </div>
-                        <div class="swapbox_select">
-                            <input class="number form-control" placeholder="amount" id="to_amount" autocomplete="off">
-                        </div>
+                    <div id="test3">
                     </div>
-                    <div>Estimated Gas: <span id="gas_estimate"></span></div>
-                    <div>
-                        <button class="ui teal button" id="swap_button" style="width: 100%">
+                    <div id="form">
+                        <div class="swapbox" id="swap-from">
+                            <label id="from_amount_label" style="color: black"></label>
+                            <div class="swapbox_select token_select" id="from_token_select">
+                                <img class="token_image" id="from_token_img">
+                                <span id="from_token_text">Select Token</span>
+                            </div>
+                            <div class="swapbox_select">
+                                <input class="number form-control" placeholder="amount" id="from_amount">
+                            </div>
+                        </div>
+                        <div class="swapbox" id="swap-to">
+                            <div class="swapbox_select token_select" id="to_token_select">
+                                <img class="token_image" id="to_token_img">
+                                <span id="to_token_text">Select Token</span>
+                            </div>
+                            <div class="swapbox_select">
+                                <input class="number form-control" placeholder="amount" id="to_amount" autocomplete="off">
+                            </div>
+                        </div>
+                        <div>Estimated Gas: <span id="gas_estimate"></span></div>
+                        <div>
+                            <button class="ui teal button" id="swap_button" style="width: 100%">
                             Swap
                         </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div>
-    </div>
-    </div>
-    </div>
-    <div id="testing">
+        <div>
+        </div>
 
-    </div>
-    <div class="modal" id="token_modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div>
-                        <div class="searchbardiv">
-                            <input type="text" id="tokenSearch" class="searchbar" placeholder="Custom Token.." autocomplete="off">
-                        </div>
+
+        <div id="testing">
+
+        </div>
+        <div class="modal" id="token_modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
                         <div>
-                            <button id="search_button" class="searchbutton" type="submit">Search</button>
+                            <div class="searchbardiv">
+                                <input type="text" id="tokenSearch" class="searchbar" placeholder="Custom Token.." autocomplete="off">
+                            </div>
+                            <div>
+                                <button id="search_button" class="searchbutton" type="submit">Search</button>
+                            </div>
                         </div>
+                        <button id="modal_close" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
                     </div>
-                    <button id="modal_close" type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-                </div>
-                <div class="modal-body">
-                    <div id="token_list"></div>
+                    <div class="modal-body">
+                        <div id="token_list"></div>
+                    </div>
                 </div>
             </div>
         </div>

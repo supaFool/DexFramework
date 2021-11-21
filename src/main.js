@@ -51,8 +51,12 @@ async function init() {
     }
 }
 
-function setHelperData() {
+async function setHelperData() {
     global.user_profile.born = JSON.stringify(currentUser.createdAt);
+    const options = { chain: 'bsc' }
+    global.user_profile.balances = await Moralis.Web3API.account.getTokenBalances(options);
+    global.user_profile.native_balance = await Moralis.Web3API.account.getNativeBalance(options);
+    console.log(global.user_profile.balances)
 }
 
 //Adds Searched Token info to vars, and prints to console.
@@ -130,6 +134,7 @@ async function selectToken(address) {
         console.log("Buying token: " + address.name);
         if (currentSelectSide == 'from') {
             fromToken = address;
+            //fromToken.amount = address.amount;
         }
         if (currentSelectSide == 'to') {
             toToken = address;
@@ -153,11 +158,24 @@ async function selectToken(address) {
 
 }
 
-function renderInterface() {
+async function renderInterface() {
     if (currentSelectSide == 'from') {
         //document.getElementById("from_token_img").src = currentTrade.from.logo;
         document.getElementById("from_token_text").innerHTML =
             fromToken.symbol;
+        console.log(fromToken.address);
+        for (let index = 0; index < global.user_profile.balances.length; index++) {
+            const id = global.user_profile.balances[index];
+            if (id.token_address == fromToken.address) {
+                console.log("Found Balance");
+                console.log("Foiund " + id.token_address);
+                document.getElementById("from_amount_label").innerText = id.balance / 10 ** id.decimals;
+                return;
+            } else {
+                //console.log("Didnt Find" + id.token_address + " using address: " + fromToken.address);
+                document.getElementById("from_amount_label").innerText = "";
+            }
+        }
     }
     if (currentSelectSide == 'to') {
         //document.getElementById("to_token_img").src = currentTrade.to.logoURI;
@@ -362,6 +380,11 @@ function txHistory() {
 
 
     document.getElementById("test3").innerHTML = " <a href='" + url + tId + "'>" + "View Transaction" + "</a> ";
+}
+
+function openSidebar() {
+    $('.ui.sidebar')
+        .sidebar('toggle');
 }
 
 init();

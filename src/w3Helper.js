@@ -3,5 +3,6 @@ const global = {
         chain: "bsc",
         entity: "id",
         saved_tokens: "tokens favorited",
+        balances: ""
     }
 }

@@ -324,7 +324,14 @@ async function trySwap() {
         rtest = receipt;
         clearAmounts();
         txHistory();
+<<<<<<< Updated upstream
         alert("Swap Complete");
+=======
+        document.getElementById("from_amount").value == "";
+        document.getElementById("to_amount").value == "";
+        document.getElementById("slippage").value == "";
+        //alert("Swap Complete");
+>>>>>>> Stashed changes
     } catch (error) {
         if (error.code == 4001) {
             alert("Transaction cancelled");

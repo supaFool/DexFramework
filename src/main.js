@@ -169,7 +169,7 @@ async function renderInterface() {
 
             //Here is the ISSUE
             console.log(global.user_profile.native_bal.balance / 10 ** 18);
-            document.getElementById("bnbdiv_from").innerText = global.user_profile.native_bal.balance / 10 ** 18;
+            document.getElementById("bnbdiv_from").innerText = (global.user_profile.native_bal.balance / 10 ** 18).toFixed(6);
             return;
         }
 
@@ -178,7 +178,7 @@ async function renderInterface() {
             if (id.token_address == fromToken.address) {
                 console.log("Found Balance");
                 console.log("Found " + id.token_address);
-                document.getElementById("bnbdiv_from").innerText = id.balance / 10 ** id.decimals;
+                document.getElementById("bnbdiv_from").innerText = (id.balance / 10 ** id.decimals).toFixed(6);
                 return;
             } else {
                 //console.log("Didnt Find" + id.token_address + " using address: " + fromToken.address);
@@ -195,7 +195,7 @@ async function renderInterface() {
 
             //Here is the ISSUE
             console.log(global.user_profile.native_bal.balance / 10 ** 18);
-            document.getElementById("bnbdiv_to").innerText = global.user_profile.native_bal.balance / 10 ** 18;
+            document.getElementById("bnbdiv_to").innerText = (global.user_profile.native_bal.balance / 10 ** 18).toFixed(6);
             return;
         }
 
@@ -205,7 +205,7 @@ async function renderInterface() {
             if (id.token_address == toToken.address) {
                 console.log("Found Balance");
                 console.log("Found " + id.token_address);
-                document.getElementById("bnbdiv_to").innerText = id.balance / 10 ** id.decimals;
+                document.getElementById("bnbdiv_to").innerText = (id.balance / 10 ** id.decimals).toFixed(6);
                 return;
             }
         }
@@ -335,7 +335,8 @@ async function getQuoteReverse() {
         amount: amount,
     });
     // console.log(JSON.stringify(quote.toToken.decimals) + "This is the qoute");
-    document.getElementById("gas_estimate").innerHTML = quote.estimatedGas;
+    document.getElementById("gas_estimate").innerText = () => { quote.estimatedGas };
+    console.log(quote.gas_estimate + " fuel used");
     document.getElementById("from_amount").value =
         quote.toTokenAmount / 10 ** toToken.decimals;
 }

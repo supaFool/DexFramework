@@ -55,7 +55,7 @@ async function setHelperData() {
     global.user_profile.born = JSON.stringify(currentUser.createdAt);
     const options = { chain: 'bsc' }
     global.user_profile.balances = await Moralis.Web3API.account.getTokenBalances(options);
-    global.user_profile.native_balance = await Moralis.Web3API.account.getNativeBalance(options);
+    global.user_profile.native_bal = await Moralis.Web3API.account.getNativeBalance(options);
 }
 
 //Adds Searched Token info to vars, and prints to console.
@@ -163,6 +163,15 @@ async function renderInterface() {
         document.getElementById("from_token_text").innerHTML =
             fromToken.symbol;
         console.log(fromToken.address);
+
+        if (fromToken.address == global.helper_data.bnb_address) {
+            console.log("using bnb");
+
+            //Here is the ISSUE
+            console.log(global.user_profile.native_bal.balance / 10 ** 18);
+            document.getElementById("from_amount_label").innerText = JSON.parse(global.user_profile.native_bal.balance / 10 ** 18);
+        }
+
         for (let index = 0; index < global.user_profile.balances.length; index++) {
             const id = global.user_profile.balances[index];
             if (id.token_address == fromToken.address) {

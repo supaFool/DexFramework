@@ -169,7 +169,7 @@ async function renderInterface() {
 
             //Here is the ISSUE
             console.log(global.user_profile.native_bal.balance / 10 ** 18);
-            document.getElementById("bnbdiv").innerText = global.user_profile.native_bal.balance / 10 ** 18;
+            document.getElementById("bnbdiv_from").innerText = global.user_profile.native_bal.balance / 10 ** 18;
             return;
         }
 
@@ -178,24 +178,34 @@ async function renderInterface() {
             if (id.token_address == fromToken.address) {
                 console.log("Found Balance");
                 console.log("Found " + id.token_address);
-                document.getElementById("bnbdiv").innerText = id.balance / 10 ** id.decimals;
+                document.getElementById("bnbdiv_from").innerText = id.balance / 10 ** id.decimals;
                 return;
             } else {
                 //console.log("Didnt Find" + id.token_address + " using address: " + fromToken.address);
-                document.getElementById("bnbdiv").innerText = "";
+                document.getElementById("bnbdiv_from").innerText = "";
             }
         }
     }
     if (currentSelectSide == 'to') {
         //document.getElementById("to_token_img").src = currentTrade.to.logoURI;
         document.getElementById("to_token_text").innerHTML = toToken.symbol;
+
+        if (toToken.address == global.helper_data.bnb_address) {
+            console.log("using bnb");
+
+            //Here is the ISSUE
+            console.log(global.user_profile.native_bal.balance / 10 ** 18);
+            document.getElementById("bnbdiv_to").innerText = global.user_profile.native_bal.balance / 10 ** 18;
+            return;
+        }
+
         console.log(toToken.address);
         for (let index = 0; index < global.user_profile.balances.length; index++) {
             const id = global.user_profile.balances[index];
             if (id.token_address == toToken.address) {
                 console.log("Found Balance");
                 console.log("Found " + id.token_address);
-                document.getElementById("to_amount_label").innerText = id.balance / 10 ** id.decimals;
+                document.getElementById("bnbdiv_to").innerText = id.balance / 10 ** id.decimals;
                 return;
             }
         }

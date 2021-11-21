@@ -56,7 +56,6 @@ async function setHelperData() {
     const options = { chain: 'bsc' }
     global.user_profile.balances = await Moralis.Web3API.account.getTokenBalances(options);
     global.user_profile.native_balance = await Moralis.Web3API.account.getNativeBalance(options);
-    console.log(global.user_profile.balances)
 }
 
 //Adds Searched Token info to vars, and prints to console.

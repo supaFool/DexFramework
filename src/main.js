@@ -353,6 +353,7 @@ async function trySwap() {
     } catch (error) {
         if (error.code == 4001) {
             alert("Transaction cancelled");
+            clearAmounts();
         }
         console.log(error);
     }

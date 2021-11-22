@@ -7,7 +7,7 @@
             box-shadow: 0 0 5px black;
             margin-right: auto;
             margin-left: auto;
-            height: 400px;
+            height: auto;
         }
         
         #h4 {
@@ -15,7 +15,7 @@
         }
         
         .swapbox_select {
-            width: 50%;
+            width: 100%;
             float: left;
         }
         
@@ -216,4 +216,8 @@
         .tmbg {
             background-position: top;
             background-size: cover;
+        }
+        
+        .navbar-dark .navbar-nav .nav-link {
+            color: #ffffff
         }

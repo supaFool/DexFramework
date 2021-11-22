@@ -197,6 +197,9 @@ async function renderInterface() {
             console.log(global.user_profile.native_bal.balance / 10 ** 18);
             document.getElementById("bnbdiv_to").innerText = (global.user_profile.native_bal.balance / 10 ** 18).toFixed(6);
             return;
+        } else {
+            //console.log("Didnt Find" + id.token_address + " using address: " + fromToken.address);
+            document.getElementById("bnbdiv_to").innerText = "";
         }
 
         console.log(toToken.address);

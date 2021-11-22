@@ -124,14 +124,21 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
+
+                        <!-- 
+                            Token Search
+                        -->
                         <div>
-                            <div class="searchbardiv">
-                                <input type="text" id="tokenSearch" class="searchbar" placeholder="Custom Token.." autocomplete="off">
+                            <div class="ui left icon input">
+                                <input type="text" id="tokenSearch" style="width: 75%" placeholder="Custom Token.." autocomplete="off">
+                                <i class="hockey puck icon"></i>
                             </div>
-                            <div>
-                                <button id="search_button" class="searchbutton" type="submit">Search</button>
-                            </div>
+                            <button id="search_button" class="ui grey basic button">Search</button>
+
                         </div>
+
+
+
                         <button id="modal_close" type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

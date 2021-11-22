@@ -18,6 +18,13 @@ async function init() {
     if (currentUser) {
         logged_in = true;
         document.getElementById("login_button").innerText = "Logout";
+
+
+        for (var i = 0; i < global.user_profile.balances; i++) {
+            console.log(global.user_profile.balances[i]);
+        }
+
+        document.getElementById("testing").innerText = global.user_profile.balances;
     }
 
     //If user is not logged in

@@ -52,10 +52,7 @@ async function init() {
 }
 
 async function setHelperData() {
-    global.user_profile.born = JSON.stringify(currentUser.createdAt);
-    const options = { chain: 'bsc' }
-    global.user_profile.balances = await Moralis.Web3API.account.getTokenBalances(options);
-    global.user_profile.native_bal = await Moralis.Web3API.account.getNativeBalance(options);
+    global.helper_functions.loadData();
 }
 
 //Adds Searched Token info to vars, and prints to console.
@@ -403,7 +400,6 @@ function openSidebar() {
 init();
 
 document.getElementById("modal_close").onclick = closeModal;
-document.getElementById("lg").onclick = logOut;
 document.getElementById("from_token_select").onclick = () => {
     openModal("from");
 };

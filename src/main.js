@@ -215,34 +215,6 @@ async function renderInterface() {
     }
 }
 
-async function login() {
-    try {
-        currentUser = Moralis.User.current();
-        if (!currentUser) {
-            document.getElementById("login_button").innerText = "Authenticating...";
-            currentUser = await Moralis.authenticate();
-            document.getElementById("swap_button").disabled = false;
-            setHelperData();
-        } else {
-            logOut();
-        }
-        document.getElementById("swap_button").disabled = false;
-        document.getElementById("login_button").innerText = "Logout";
-        logged_in = true;
-    } catch (error) {
-        if (error.message == "MetaMask Message Signature: User denied message signature.") {
-            alert("Login cancelled")
-            document.getElementById("login_button").innerText = "Sign in with Metamask";
-        }
-    }
-}
-async function logOut() {
-    currentUser = await Moralis.User.logOut();
-    document.getElementById("login_button").innerText = "Sign in with Metamask";
-    document.getElementById("swap_button").disabled = true;
-
-    logged_in = false;
-}
 
 function openModal(side) {
     currentSelectSide = side;
@@ -438,7 +410,6 @@ document.getElementById("from_token_select").onclick = () => {
 document.getElementById("to_token_select").onclick = () => {
     openModal("to");
 };
-document.getElementById("login_button").onclick = login;
 document.getElementById("from_amount").oninput = getQuote;
 document.getElementById("to_amount").oninput = getQuoteReverse;
 document.getElementById("swap_button").onclick = trySwap;

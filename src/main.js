@@ -244,6 +244,35 @@ async function logOut() {
     logged_in = false;
 }
 
+async function loginWC() {
+    try {
+        currentUser = Moralis.User.current();
+        if (!currentUser) {
+            document.getElementById("login_button_wc").innerText = "Authenticating...";
+            currentUser = await Moralis.authenticate({ provider: "walletconnect", chainId: 56 })
+            document.getElementById("swap_button").disabled = false;
+            setHelperData();
+        } else {
+            logOutWC();
+        }
+        document.getElementById("swap_button").disabled = false;
+        document.getElementById("login_button_wc").innerText = "Logout";
+        logged_in = true;
+    } catch (error) {
+        if (error.message == "User closed modal") {
+            alert("Login cancelled")
+            document.getElementById("login_button_wc").innerText = "Sign in with WalletConnect";
+        }
+    }
+}
+async function logOutWC() {
+    currentUser = await Moralis.User.logOut();
+    document.getElementById("login_button_wc").innerText = "Sign in with WalletConnect";
+    document.getElementById("swap_button").disabled = true;
+
+    logged_in = false;
+}
+
 function openModal(side) {
     currentSelectSide = side;
     if (side == 'from') {
@@ -439,6 +468,7 @@ document.getElementById("to_token_select").onclick = () => {
     openModal("to");
 };
 document.getElementById("login_button").onclick = login;
+document.getElementById("login_button_wc").onclick = loginWC;
 document.getElementById("from_amount").oninput = getQuote;
 document.getElementById("to_amount").oninput = getQuoteReverse;
 document.getElementById("swap_button").onclick = trySwap;
